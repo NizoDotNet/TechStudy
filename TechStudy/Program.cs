@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TechStudy.Data;
+using TechStudy.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,8 @@ builder.Services.Configure<IdentityOptions>(o =>
     o.User.RequireUniqueEmail = true;
     o.SignIn.RequireConfirmedEmail = true;
 });
+
+builder.Services.Configure<EmailOption>(builder.Configuration.GetSection("EmailOption"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
