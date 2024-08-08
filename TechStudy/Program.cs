@@ -13,7 +13,17 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.Configure<IdentityOptions>(o =>
+{
+    o.Password.RequiredUniqueChars = 2;
+    o.Password.RequireUppercase = false;
+    o.Password.RequireLowercase = false;
+    o.Password.RequireNonAlphanumeric = false;
+    o.Password.RequireDigit = false;
 
+    o.User.RequireUniqueEmail = true;
+    o.SignIn.RequireConfirmedEmail = true;
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
