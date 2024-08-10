@@ -85,11 +85,18 @@ namespace TechStudy.Areas.Identity.Pages.Account
             [EmailAddress]
             public string Email { get; set; }
         }
-        
-        public IActionResult OnGet() => RedirectToPage("./Login");
+
+        public IActionResult OnGet()
+        {
+            return NotFound();
+
+            RedirectToPage("./Login");
+        }
 
         public IActionResult OnPost(string provider, string returnUrl = null)
         {
+            return NotFound();
+
             // Request a redirect to the external login provider.
             var redirectUrl = Url.Page("./ExternalLogin", pageHandler: "Callback", values: new { returnUrl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
@@ -98,6 +105,8 @@ namespace TechStudy.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnGetCallbackAsync(string returnUrl = null, string remoteError = null)
         {
+            return NotFound();
+
             returnUrl = returnUrl ?? Url.Content("~/");
             if (remoteError != null)
             {
@@ -140,6 +149,8 @@ namespace TechStudy.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
         {
+            return NotFound();
+
             returnUrl = returnUrl ?? Url.Content("~/");
             // Get the information about the user from the external login provider
             var info = await _signInManager.GetExternalLoginInfoAsync();

@@ -57,6 +57,8 @@ namespace TechStudy.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnGetAsync()
         {
+            return NotFound();
+
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -80,6 +82,8 @@ namespace TechStudy.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostRemoveLoginAsync(string loginProvider, string providerKey)
         {
+            return NotFound();
+
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -100,6 +104,8 @@ namespace TechStudy.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostLinkLoginAsync(string provider)
         {
+            return NotFound();
+
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
@@ -111,6 +117,8 @@ namespace TechStudy.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnGetLinkLoginCallbackAsync()
         {
+            return NotFound();
+
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {

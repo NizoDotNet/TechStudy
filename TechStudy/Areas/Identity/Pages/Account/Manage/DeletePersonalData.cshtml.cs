@@ -58,6 +58,7 @@ namespace TechStudy.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnGet()
         {
+            return NotFound();
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -65,11 +66,11 @@ namespace TechStudy.Areas.Identity.Pages.Account.Manage
             }
 
             RequirePassword = await _userManager.HasPasswordAsync(user);
-            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
+            return NotFound();
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {

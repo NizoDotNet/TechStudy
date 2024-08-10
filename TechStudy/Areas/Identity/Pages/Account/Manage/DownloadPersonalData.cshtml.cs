@@ -35,6 +35,7 @@ namespace TechStudy.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
+            return NotFound();
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
