@@ -10,17 +10,14 @@ namespace TechStudy.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IOptions<EmailOption> _emailOption;
-        public HomeController(ILogger<HomeController> logger, IOptions<EmailOption> emailOption)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _emailOption = emailOption;
         }
 
         public IActionResult Index()
         {
-            EmailOption emailOption = _emailOption.Value;
-            return View(emailOption);
+            return View();
         }
 
         public IActionResult Privacy()

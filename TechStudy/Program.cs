@@ -27,7 +27,6 @@ builder.Services.Configure<IdentityOptions>(o =>
     o.Password.RequireDigit = false;
 
     o.User.RequireUniqueEmail = true;
-    o.SignIn.RequireConfirmedEmail = false;
 });
 
 builder.Services.Configure<EmailOption>(builder.Configuration.GetSection("EmailOption"));
