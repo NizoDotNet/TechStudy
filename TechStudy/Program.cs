@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using TechStudy.Data;
 using TechStudy.Options;
+using TechStudy.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IEmailSender, MailKitEmailSender>();
+
 builder.Services.Configure<IdentityOptions>(o =>
 {
     o.Password.RequiredUniqueChars = 2;
@@ -23,7 +27,7 @@ builder.Services.Configure<IdentityOptions>(o =>
     o.Password.RequireDigit = false;
 
     o.User.RequireUniqueEmail = true;
-    o.SignIn.RequireConfirmedEmail = true;
+    o.SignIn.RequireConfirmedEmail = false;
 });
 
 builder.Services.Configure<EmailOption>(builder.Configuration.GetSection("EmailOption"));
