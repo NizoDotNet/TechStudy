@@ -21,8 +21,11 @@ builder.Services.Configure<IdentityOptions>(o =>
     o.Password.RequireLowercase = false;
     o.Password.RequireNonAlphanumeric = false;
     o.Password.RequireDigit = false;
-
     o.User.RequireUniqueEmail = true;
+
+    o.SignIn.RequireConfirmedPhoneNumber = false;
+    o.SignIn.RequireConfirmedEmail = false;
+    o.SignIn.RequireConfirmedAccount = false;
 });
 
 var app = builder.Build();
