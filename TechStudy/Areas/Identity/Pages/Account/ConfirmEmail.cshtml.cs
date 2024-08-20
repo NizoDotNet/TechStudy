@@ -31,7 +31,6 @@ namespace TechStudy.Areas.Identity.Pages.Account
         public string StatusMessage { get; set; }
         public async Task<IActionResult> OnGetAsync(string userId, string code)
         {
-            return NotFound();
 
             if (userId == null || code == null)
             {
