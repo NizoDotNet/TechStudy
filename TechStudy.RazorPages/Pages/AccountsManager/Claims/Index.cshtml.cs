@@ -1,12 +1,25 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TechStudy.RazorPages.Services;
 
-namespace TechStudy.RazorPages.Pages.AccountsManager.Claims
+namespace TechStudy.RazorPages.Pages.AccountsManager.Claims;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly ILogger<IndexModel> _logger;
+    private readonly IUserService _userService;
+
+    public IndexModel(IUserService userService)
     {
-        public void OnGet()
-        {
-        }
+        _userService = userService;
+    }
+
+    public IEnumerable<IdentityUser> Users { get; set; }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        Users = await _userService.GetAllAsync();
+        return Page();
     }
 }

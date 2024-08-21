@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Google.Protobuf.WellKnownTypes;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Identity.Client;
 using System.Security.Claims;
 using TechStudy.RazorPages.Repositories;
 
@@ -15,7 +17,7 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public async Task<bool> AddClaim(string userId, Claim claim)
+    public async Task<bool> AddClaimAsync(string userId, Claim claim)
     {
         var user = await _userRepository.GetAsync(userId);
         if (user is null)
@@ -43,8 +45,44 @@ public class UserService : IUserService
 
     public async Task<IdentityUser> GetAsync(string id)
     {
-        var user =  await _userRepository.GetAsync(id);
+        var user = await _userRepository.GetAsync(id);
         return user;
+    }
+
+    public async Task<Claim> GetClaimAsync(string userId, string type)
+    {
+        var user = await _userRepository.GetAsync(userId);
+        if(user is null)
+        {
+            return new(type, string.Empty);
+        }
+        var userClaims = await _userManager.GetClaimsAsync(user); 
+        var claim = userClaims.Where(c => c.Type == type).FirstOrDefault();
+        return claim ?? new(type, string.Empty);
+    }
+
+    public async Task<Claim> GetClaimAsync(IdentityUser user, string type)
+    {
+        var userClaims = await _userManager.GetClaimsAsync(user);
+        var claim = userClaims.Where(c => c.Type == type).FirstOrDefault();
+        return claim ?? new(type, string.Empty);
+    }
+
+    public async Task<IEnumerable<Claim>> GetClaimsAsync(string userId)
+    {
+        var user = await _userRepository.GetAsync(userId);
+
+        return await _userManager.GetClaimsAsync(user);
+    }
+
+    public async Task<IEnumerable<Claim>> GetClaimsAsync(IdentityUser user)
+    {
+        return await _userManager.GetClaimsAsync(user);
+    }
+
+    public async Task<IEnumerable<IdentityUser>> GetUsersAsync()
+    {
+        return await _userRepository.GetAllAsync();
     }
 
     public async Task<bool> HasClaim(string userId, Claim claim)
@@ -58,7 +96,29 @@ public class UserService : IUserService
         return userClaims.Any(c => c.Type == claim.Type && c.Value == claim.Value);
     }
 
-    public async Task<bool> RemoveClaim(string userId, Claim claim)
+    public async Task<bool> HasClaim(string userId, string type, string value)
+    {
+        var user = await _userRepository.GetAsync(userId);
+        if (user is null)
+        {
+            return false;
+        }
+        var userClaims = await _userManager.GetClaimsAsync(user);
+        return userClaims.Any(c => c.Type == type && c.Value == value);
+    }
+
+    public async Task<bool> HasClaim(string userId, string type)
+    {
+        var user = await _userRepository.GetAsync(userId);
+        if (user is null)
+        {
+            return false;
+        }
+        var userClaims = await _userManager.GetClaimsAsync(user);
+        return userClaims.Any(c => c.Type == type);
+    }
+
+    public async Task<bool> RemoveClaimAsync(string userId, Claim claim)
     {
         var user = await _userRepository.GetAsync(userId);
         if (user is null)
@@ -68,6 +128,7 @@ public class UserService : IUserService
         var res = await _userManager.RemoveClaimAsync(user, claim);
         return res.Succeeded;
     }
+
 
     public async Task<bool> UpdateAsync(string id, IdentityUser updatedUser)
     {

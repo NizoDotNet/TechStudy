@@ -12,8 +12,12 @@ public interface IUserService
     Task<bool> CreateUser(IdentityUser user);
     Task<bool> AddClaimAsync(string userId, Claim claim);
     Task<bool> RemoveClaimAsync(string userId, Claim claim);
-    Task<bool> HasClaim(string userId, Claim claim);
+    Task<bool> HasClaim(string userId, string type, string value);
+    Task<bool> HasClaim(string userId, string type);
+    Task<Claim> GetClaimAsync(string userId, string type);
+    Task<Claim> GetClaimAsync(IdentityUser user, string type);
     Task<IEnumerable<Claim>> GetClaimsAsync(string userId);
-    Task<IEnumerable<IdentityUser>> GetUserAsync();
+    Task<IEnumerable<Claim>> GetClaimsAsync(IdentityUser user);
+    Task<IEnumerable<IdentityUser>> GetUsersAsync();
     
 }

@@ -1,4 +1,33 @@
 ﻿@page
-@model TechStudy.RazorPages.Pages.AccountsManager.Claims.IndexModel
+@model IndexModel
 @{
 }
+
+<table class="table">
+    <thead>
+        <th>
+            First Name
+        </th>
+        <th>
+            Second Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Phone Number
+        </th>
+
+    </thead>
+    <tbody>
+        @foreach(var user in Model.Users)
+        {
+            <td>
+                @Model.UserService.GetClaimAsync(user, "FirstName")
+            </td>
+            <td>
+                @Model.UserService.GetClaimAsync(user, "SecondName")
+            </td>
+        }
+    </tbody>
+</table>
