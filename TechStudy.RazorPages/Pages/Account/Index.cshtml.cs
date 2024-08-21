@@ -20,6 +20,8 @@ public class IndexModel : PageModel
     public async Task<IActionResult> OnGetAsync(string id)
     {
         var user = await _userRepository.GetAsync(id);
+        if(user is null) 
+            { return NotFound(); }
         Account = user;
         if (user.Id == HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)!.Value)
         {

@@ -5,6 +5,8 @@
 @if(Model.IsCurrentUser)
 {
     <h2>It's your account</h2>
+    <a asp-area="Identity" asp-page="/Account/Manage/Index">Manage your profile</a>
+
 }
 else
 {

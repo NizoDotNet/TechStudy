@@ -41,10 +41,6 @@ public class UserRepository : IUserRepository
     public async Task<IdentityUser> GetAsync(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
-        if (user is null)
-        {
-            return new IdentityUser();
-        }
         return user;
     }
 
