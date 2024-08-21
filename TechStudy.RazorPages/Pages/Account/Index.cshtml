@@ -1,0 +1,13 @@
+﻿@page "{id}"
+@model IndexModel
+@{
+}
+@if(Model.IsCurrentUser)
+{
+    <h2>It's your account</h2>
+}
+else
+{
+    <h2>It's <b>NOT</b> your account</h2>
+
+}
