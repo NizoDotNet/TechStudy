@@ -17,9 +17,12 @@ public class IndexModel : PageModel
 
     public IEnumerable<IdentityUser> Users { get; set; }
 
+    public IUserService UserService => _userService;
+
     public async Task<IActionResult> OnGetAsync()
     {
         Users = await _userService.GetAllAsync();
+
         return Page();
     }
 }

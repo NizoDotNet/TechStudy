@@ -5,29 +5,52 @@
 
 <table class="table">
     <thead>
-        <th>
-            First Name
-        </th>
-        <th>
-            Second Name
-        </th>
-        <th>
-            Email
-        </th>
-        <th>
-            Phone Number
-        </th>
-
+        <tr>
+            <th>
+                First Name
+            </th>
+            <th>
+                Second Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Phone Number
+            </th>
+            <th>
+                Email Confirmed
+            </th>
+            <th>
+                Phone Number Confirmed
+            </th>
+        </tr>
+       
     </thead>
     <tbody>
         @foreach(var user in Model.Users)
         {
-            <td>
-                @Model.UserService.GetClaimAsync(user, "FirstName")
-            </td>
-            <td>
-                @Model.UserService.GetClaimAsync(user, "SecondName")
-            </td>
+            <tr>
+                <td>
+                    @((await Model.UserService.GetClaimAsync(user, "FirstName")).Value)
+                </td>
+                <td>
+                    @((await Model.UserService.GetClaimAsync(user, "SecondName")).Value)
+                </td>
+                <td>
+                    @user.Email
+                </td>
+                <td>
+                    @user.PhoneNumber
+                </td>
+                <td>
+                    @user.EmailConfirmed
+                </td>
+                <td>
+                    @user.PhoneNumberConfirmed
+                </td>
+            </tr>
+            
         }
     </tbody>
 </table>
