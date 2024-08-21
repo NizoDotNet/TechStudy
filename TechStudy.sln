@@ -5,7 +5,7 @@ VisualStudioVersion = 17.11.34909.67
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechStudy", "TechStudy\TechStudy.csproj", "{90F2B0BA-5E68-48C8-92D0-4D63A7CF1F65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechStudy.RazorPages", "TechStudy.RazorPages\TechStudy.RazorPages.csproj", "{330A9D38-801F-420C-9D69-233FB5360741}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechStudy.RazorPages", "TechStudy.RazorPages\TechStudy.RazorPages.csproj", "{330A9D38-801F-420C-9D69-233FB5360741}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

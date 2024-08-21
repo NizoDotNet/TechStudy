@@ -125,8 +125,8 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                Claim firstNameClaim = new Claim("FirstName", Input.FirstName);
-                Claim secondtNameClaim = new Claim("SecondName", Input.SecondName);
+                Claim firstNameClaim = new("FirstName", Input.FirstName);
+                Claim secondtNameClaim = new("SecondName", Input.SecondName);
                 Claim role = new("Role", "User");
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
