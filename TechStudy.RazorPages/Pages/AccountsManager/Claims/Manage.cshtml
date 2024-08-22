@@ -1,0 +1,24 @@
+﻿@page
+@model TechStudy.RazorPages.Pages.AccountsManager.Claims.ManageModel
+@{
+}
+
+<form method="post">
+    <div class="row mb-3">
+        <select asp-items="Model.UserSelectList" asp-for="SelectedUserId">
+            <option></option>
+        </select>
+
+    </div>
+
+
+    <div class="row mb-3">
+        <label>Claim Type</label>
+        <input asp-for="ClaimType" />
+    </div class="row mb-3">
+        <label>Claim Type</label>
+
+        <input asp-for="ClaimValue" />
+    </div>
+    <button class="btn btn-primary">Submit</button>
+</form>

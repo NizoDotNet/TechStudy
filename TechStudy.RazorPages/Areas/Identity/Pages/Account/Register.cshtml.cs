@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using TechStudy.RazorPages.Helpers;
+using ZstdSharp.Unsafe;
 
 namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
 {
@@ -30,13 +32,14 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
+        private readonly ApplicationIdentityClaims _claims;
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationIdentityClaims claims)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +47,7 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _claims = claims;
         }
 
         /// <summary>
@@ -125,15 +129,15 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                Claim firstNameClaim = new("FirstName", Input.FirstName);
-                Claim secondtNameClaim = new("SecondName", Input.SecondName);
-                Claim role = new("Role", "User");
+                Claim firstNameClaim = _claims.CreateFirstName(Input.FirstName);
+                Claim secondNameClaim = _claims.CreateSecondName(Input.SecondName);
+                Claim role = _claims.UserRole();
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    await _userManager.AddClaimsAsync(user, [firstNameClaim, secondtNameClaim, role]);
+                    await _userManager.AddClaimsAsync(user, [firstNameClaim, secondNameClaim, role]);
                     _logger.LogInformation("Claims Added");
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

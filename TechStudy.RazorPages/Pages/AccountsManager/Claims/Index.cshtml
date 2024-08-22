@@ -1,56 +1,19 @@
 ﻿@page
-@model IndexModel
-@{
-}
+@model TechStudy.RazorPages.Pages.AccountsManager.Claims.IndexModel
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                First Name
-            </th>
-            <th>
-                Second Name
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Phone Number
-            </th>
-            <th>
-                Email Confirmed
-            </th>
-            <th>
-                Phone Number Confirmed
-            </th>
-        </tr>
-       
-    </thead>
-    <tbody>
-        @foreach(var user in Model.Users)
+<a asp-page="Manage" class="btn">Manage</a>
+@foreach(var user in Model.Users)
+{
+    var userClaims = await Model.UserService.GetClaimsAsync(user);
+    
+    <div class="row">
+        <h5>@user.Email</h5>
+        @foreach(var claim in userClaims)
         {
-            <tr>
-                <td>
-                    @((await Model.UserService.GetClaimAsync(user, "FirstName")).Value)
-                </td>
-                <td>
-                    @((await Model.UserService.GetClaimAsync(user, "SecondName")).Value)
-                </td>
-                <td>
-                    @user.Email
-                </td>
-                <td>
-                    @user.PhoneNumber
-                </td>
-                <td>
-                    @user.EmailConfirmed
-                </td>
-                <td>
-                    @user.PhoneNumberConfirmed
-                </td>
-            </tr>
-            
+            <hr />
+            <p>Claim Type: @claim.Type</p>
+            <p>Claim Value: @claim.Value</p>
+
         }
-    </tbody>
-</table>
+    </div>
+}

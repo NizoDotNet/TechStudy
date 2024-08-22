@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TechStudy.RazorPages.Data;
+using TechStudy.RazorPages.Helpers;
 using TechStudy.RazorPages.Repositories;
 using TechStudy.RazorPages.Services;
 
@@ -15,8 +16,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddSingleton(new ApplicationIdentityClaims());
 
 builder.Services.AddRazorPages();
 builder.Services.Configure<IdentityOptions>(o =>

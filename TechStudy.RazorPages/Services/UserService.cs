@@ -28,6 +28,12 @@ public class UserService : IUserService
         return res.Succeeded;
     }
 
+    public async Task<bool> AddClaimAsync(IdentityUser user, Claim claim)
+    {
+        var res = await _userManager.AddClaimAsync(user, claim);
+        return res.Succeeded;
+    }
+
     public async Task<bool> CreateUser(IdentityUser user)
     {
         return await _userRepository.CreateUser(user);
