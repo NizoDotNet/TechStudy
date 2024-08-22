@@ -49,6 +49,12 @@
                 <td>
                     @user.PhoneNumberConfirmed
                 </td>
+                <td>
+                    <a  class="btn btn-danger" asp-route="@user.Id" asp-page="Delete">Delete</a>
+                </td>
+                <td>
+                    <a class="btn" asp-route="@user.Id" asp-page="Manage">Manage</a>
+                </td>
             </tr>
             
         }
