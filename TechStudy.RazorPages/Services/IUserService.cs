@@ -12,7 +12,8 @@ public interface IUserService
     Task<bool> CreateUser(IdentityUser user);
     Task<bool> AddClaimAsync(string userId, Claim claim);
     Task<bool> AddClaimAsync(IdentityUser user, Claim claim);
-
+    Task<bool> ReplaceClaimAsync(string userId, Claim oldClaim, Claim newClaim);
+    Task<bool> ReplaceClaimAsync(IdentityUser user, Claim oldClaim, Claim newClaim);
     Task<bool> RemoveClaimAsync(string userId, Claim claim);
     Task<bool> HasClaim(string userId, string type, string value);
     Task<bool> HasClaim(string userId, string type);

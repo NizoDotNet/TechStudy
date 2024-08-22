@@ -8,7 +8,6 @@ namespace TechStudy.RazorPages.Pages.AccountsManager.Claims
     public class IndexModel : PageModel
     {
         private readonly IUserService _userService;
-
         public IndexModel(IUserService userService)
         {
             _userService = userService;

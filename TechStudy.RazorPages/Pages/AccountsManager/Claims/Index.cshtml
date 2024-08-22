@@ -13,7 +13,9 @@
             <hr />
             <p>Claim Type: @claim.Type</p>
             <p>Claim Value: @claim.Value</p>
-
+            <form method="post">
+                <button class="btn btn-danger" asp-page-handler="delete">Delete</button>
+            </form>
         }
     </div>
 }

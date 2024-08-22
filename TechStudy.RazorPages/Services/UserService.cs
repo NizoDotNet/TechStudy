@@ -33,6 +33,16 @@ public class UserService : IUserService
         var res = await _userManager.AddClaimAsync(user, claim);
         return res.Succeeded;
     }
+    public async Task<bool> ReplaceClaimAsync(IdentityUser user, Claim oldClaim, Claim newClaim)
+    {
+        var userClaims = await _userManager.GetClaimsAsync(user);
+        if(userClaims.Where(c => c.Type == oldClaim.Type && c.Value == oldClaim.Value ).Any())
+        {
+            var res = await _userManager.ReplaceClaimAsync(user, oldClaim, newClaim);
+            return res.Succeeded;
+        }
+        return false;
+    }
 
     public async Task<bool> CreateUser(IdentityUser user)
     {
@@ -139,5 +149,15 @@ public class UserService : IUserService
     public async Task<bool> UpdateAsync(string id, IdentityUser updatedUser)
     {
         return await _userRepository.UpdateAsync(id, updatedUser);
+    }
+
+    public async Task<bool> ReplaceClaimAsync(string userId, Claim oldClaim, Claim newClaim)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user is null) 
+        {
+            return false;
+        }
+        return await ReplaceClaimAsync(user, oldClaim, newClaim);
     }
 }
