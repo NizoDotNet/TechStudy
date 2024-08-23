@@ -50,10 +50,10 @@
                     @user.PhoneNumberConfirmed
                 </td>
                 <td>
-                    <a  class="btn btn-danger" asp-route="@user.Id" asp-page="Delete">Delete</a>
+                    <a asp-page="Delete" asp-route-id="@user.Id" class="btn btn-danger">Delete</a>
                 </td>
                 <td>
-                    <a class="btn" asp-route="@user.Id" asp-page="Manage">Manage</a>
+                    <a class="btn" asp-page="Claims/Index" asp-route-id="@user.Id">Manage  </a>
                 </td>
             </tr>
             
