@@ -10,9 +10,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("secrets.json");
 
+string connectionString = string.Empty;
 
+if(builder.Environment.IsDevelopment())
+{
+    connectionString = builder.Configuration.GetConnectionString("Local") ?? throw new Exception("No connection string");
+}
+else
+{
+    connectionString = builder.Configuration.GetConnectionString("Propduction") ?? throw new Exception("No connection string");
+}
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
+        options.UseMySQL(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
