@@ -25,9 +25,6 @@ namespace TechStudy.RazorPages.Pages.AccountsManager.Claims
 
         }
 
-        public async Task<IActionResult> OnPostDeleteAsync()
-        {
-
-        }
+        
     }
 }

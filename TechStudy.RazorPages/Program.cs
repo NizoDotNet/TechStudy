@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TechStudy.RazorPages.Data;
 using TechStudy.RazorPages.Helpers;
@@ -16,12 +17,19 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policyBuilder => policyBuilder.RequireClaim("Role", "Admin"));
+});
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton(new ApplicationIdentityClaims());
 
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(op =>
+{
+    op.Conventions.AuthorizeFolder("/AccountsManager", "AdminPolicy");
+});
 builder.Services.Configure<IdentityOptions>(o =>
 {
     o.Password.RequiredUniqueChars = 2;
@@ -57,4 +65,16 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+app.MapDelete("/claims", async ([FromQuery] string userId, [FromQuery] string type, [FromQuery] string value, IUserService userService) =>
+{
+    var res = await userService.RemoveClaimAsync(userId, new(type, value));
+    if (res)
+    {
+        return Results.Ok();
+    }
+    return Results.Problem();
+});
+
+
 app.Run();
+

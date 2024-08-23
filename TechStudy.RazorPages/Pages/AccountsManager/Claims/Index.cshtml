@@ -4,6 +4,7 @@
 <a asp-page="Manage" class="btn">Manage</a>
 @foreach(var user in Model.Users)
 {
+
     var userClaims = await Model.UserService.GetClaimsAsync(user);
     
     <div class="row">
@@ -13,13 +14,28 @@
             <hr />
             <p>Claim Type: @claim.Type</p>
             <p>Claim Value: @claim.Value</p>
-            <button class="btn btn-danger" asp-page-handler="delete">Delete</button>
+            <button class="btn btn-danger" onclick="deleteClaim('@user.Id', '@claim.Type', '@claim.Value')">Delete</button>
         }
     </div>
 }
 
 @section Scripts {
     <script>
+        function deleteClaim(userId, claimType, claimValue)
+        {
+            console.log(userId)
+            fetch(`/claims?userId=${userId}&type=${claimType}&value=${claimValue}`, {
+                method: "DELETE"
+            })
+            .then(res => {
+                if(res.ok) {
+                    alert("The claim was deleted")
+                }
+                else {
+                    console.error("Claim was not deleted");
+                }
+            })
 
+        }
     </script>
 }
