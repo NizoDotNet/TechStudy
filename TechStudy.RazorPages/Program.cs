@@ -18,7 +18,7 @@ if(builder.Environment.IsDevelopment())
 }
 else
 {
-    connectionString = builder.Configuration.GetConnectionString("Propduction") ?? throw new Exception("No connection string");
+    connectionString = builder.Configuration.GetConnectionString("Production") ?? throw new Exception("No connection string");
 }
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseMySQL(connectionString));
