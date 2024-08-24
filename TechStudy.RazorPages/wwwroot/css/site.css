@@ -20,8 +20,37 @@ html {
 body {
     margin-bottom: 60px;
     background-color: #07255b;
+    font-family: "Roboto", sans-serif;
 }
-
+:root {
+    --primary-color: #07255b;
+    --highlight-color: #a8d901;
+}
 .navimg {
     width: 40px;
+}
+
+* {
+    font-family: "Roboto", sans-serif;
+}
+
+.signup {
+    background-color: var(--highlight-color);
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.nav-item:hover, .signup:hover {
+    background-color: rgba(240, 248, 255, 0.846);
+    border-radius: 20px;
+}
+
+.custom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1%;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-color);
 }

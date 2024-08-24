@@ -1,31 +1,20 @@
-﻿.banner {
-    width: 100%;
-    height: auto;
-    box-shadow: -10px -10px 50px black;
-}
-
-.banner img {
-    margin: 0;
-    width: 100%;
-}
-
-
-
-.callmain {
-    width: 100%;
-    height: auto;
-    padding: 5%;
-    display: flex;
-    flex-direction: row;
-}
-
-.call {
+﻿.call {
     width: 200px;
     border-radius: 30px;
     padding: 2%;
     margin: 4%;
     box-shadow: 0 10px 30px black;
     background-color: aliceblue;
+    word-wrap: break-word;
+}
+
+.banner {
+    box-shadow: -10px -10px 50px black;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 .call img {
