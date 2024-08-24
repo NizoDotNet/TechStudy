@@ -1,10 +1,136 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
+<div class="main">
+    <div class="main1">
+        <div class="main1-content">
+            <div class="maintext">
+                <h1>Lorem ipsum</h1>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
+                    tenetur reiciendis aliquid modi quo labore, eveniet vitae itaque
+                    assumenda vel harum minus pariatur quasi id iusto est, quisquam
+                    neque placeat?
+                </p>
+            </div>
+            <img src="~/images/logotechstudyes7878as.png" alt="" />
+        </div>
+        <button>QEYDİYYATDAN KEÇ</button>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="columnn" id="column-section">
+        <h2>Lorem ipsum</h2>
+        <div class="columnn-containerr">
+            <div class="columnn-1">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Perspiciatis quae vitae ea officia, voluptatum quia cupiditate iste?
+                Provident velit obcaecati saepe. Velit atque ducimus temporibus
+                assumenda ratione eius, nihil magnam. Veritatis nesciunt labore
+                blanditiis fuga. Consequuntur, sit aliquam inventore numquam impedit
+                libero itaque quo ipsum ad fugit modi recusandae tenetur. Laboriosam
+                debitis modi, distinctio quod perspiciatis cumque repudiandae at in.
+            </div>
+            <div class="columnn-1">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum odio
+                quas dolores accusamus, debitis dicta, ipsam eveniet porro dolor
+                consequuntur, nam voluptatem quos nobis reiciendis sunt provident
+                temporibus placeat. Veritatis! Pariatur, adipisci libero sit
+                corporis officiis ut eius aut voluptates minima debitis nemo
+                exercitationem repellat temporibus, repellendus, sed voluptas dolore
+                porro error autem id alias incidunt perspiciatis quibusdam.
+            </div>
+            <div class="columnn-1">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio
+                accusantium, provident inventore eius velit et dolor maxime totam
+                nobis praesentium rerum voluptatum quisquam iste quia odit fugiat
+                nisi. Id, culpa.Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Debitis quas placeat explicabo quam similique! Ut excepturi
+                fuga quo incidunt tempore! Totam illo sequi nam dolore sit cum minus
+                accusamus natus?
+            </div>
+        </div>
+    </div>
+
+    <div class="team">
+        <h2>Bizim heyət</h2>
+        <button class="team-button" onclick="moveSlide(-1)">Sola çevir</button>
+        <div class="team-container">
+            <div class="team-slides">
+                <div class="team-member">
+                    <img src="~/images/monkey.jpg" alt="" class="pic1" />
+                    Lorem ipsum dolor
+                </div>
+                <div class="team-member">
+                    <img src="~/images/dogs1.png" alt="" class="pic1" />
+                    Lorem ipsum dolor
+                </div>
+                <div class="team-member">
+                    <img src="~/images/cat.jpg" alt="" class="pic1" />
+                    Lorem ipsum dolor
+                </div>
+                <div class="team-member">
+                    <img src="~/images/monkey.jpg" alt="" class="pic1" />
+                    Lorem ipsum dolor
+                </div>
+                <div class="team-member">
+                    <img src="~/images/dogs1.png" alt="" class="pic1" />
+                    Lorem ipsum dolor
+                </div>
+                <div class="team-member">
+                    <img src="~/images/monkey.jpg" alt="" class="pic1" />
+                    Lorem ipsum dolor
+                </div>
+                <div class="team-member">
+                    <img src="~/images/monkey.jpg" alt="" class="pic1" />
+                    Lorem ipsum dolor.
+                </div>
+                <div class="team-member">
+                    <img src="~/images/monkey.jpg" alt="" class="pic1" />
+                    Lorem ipsum dolor
+                </div>
+            </div>
+        </div>
+        <button class="team-button" onclick="moveSlide(1)">Sağa çevir</button>
+    </div>
+
+    <div class="member" id="column-section">
+        <div class="member-container">
+            <div class="member-1">
+                <img src="~/images/monkey.jpg" alt="" class="pic1" />
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Perspiciatis quae vitae ea officia, voluptatum quia cupiditate iste?
+                Provident velit obcaecati saepe. Velit atque ducimus temporibus
+                assumenda ratione eius, nihil magnam. Veritatis nesciunt labore
+                blanditiis fuga. Consequuntur, sit aliquam inventore numquam impedit
+                libero itaque quo ipsum ad fugit modi recusandae tenetur. Laboriosam
+                debitis modi, distinctio quod perspiciatis cumque repudiandae at in.
+            </div>
+            <div class="member-1">
+                <img src="~/images/cat.jpg" alt="" class="pic2" />
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum odio
+                quas dolores accusamus, debitis dicta, ipsam eveniet porro dolor
+                consequuntur, nam voluptatem quos nobis reiciendis sunt provident
+                temporibus placeat. Veritatis! Pariatur, adipisci libero sit
+                corporis officiis ut eius aut voluptates minima debitis nemo
+                exercitationem repellat temporibus, repellendus, sed voluptas dolore
+                porro error autem id alias incidunt perspiciatis quibusdam.
+            </div>
+            <div class="member-1">
+                <img src="~/images/dogs1.png" alt="" class="pic3" />
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio
+                accusantium, provident inventore eius velit et dolor maxime totam
+                nobis praesentium rerum voluptatum quisquam iste quia odit fugiat
+                nisi. Id, culpa.Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Debitis quas placeat explicabo quam similique! Ut excepturi
+                fuga quo incidunt tempore! Totam illo sequi nam dolore sit cum minus
+                accusamus natus?
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/index.js"></script>
+}

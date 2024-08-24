@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TechStudy.RazorPages.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/contact.css" />
+    <link rel="stylesheet" href="~/css/index.css" />
+
 </head>
 <body>
     <header>
@@ -21,7 +23,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav justify-content-center">
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-page="/Index">Home</a>
                         </li>
@@ -39,7 +41,32 @@
             @RenderBody()
         </main>
     </div>
-
+    <footer class="footer-bg">
+        <div class="container-fd">
+            <div class="row align-items-center">
+                <div class="col-md-3 footimg">
+                    <img src="~/images/logotechstudyes7878as.png"
+                         alt="Tech Study Logo"
+                         class="footer-img" />
+                </div>
+                <div class="col-md-5">
+                    <ul class="list-unstyled">
+                        <li>Contact us</li>
+                        <li>Phone: +994ghjk</li>
+                        <li>Email: info@mhjkml;.org</li>
+                        <li>
+                            Location: <a class="text-decoration-none" href="https://maps.app.goo.gl/DJD6VzhVQJTE6pKh7">
+                                Azərbaycan Dövlət Aqrar Universiteti Mühəndislik korpusu
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text-md-right">
+                    <p>Copyright © 2024 Tech Study | Powered by ADAU</p>
+                </div>
+            </div>
+        </div>
+    </footer>
   
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
