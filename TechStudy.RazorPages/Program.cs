@@ -1,6 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.Text;
+using TechStudy.RazorPages.AuthorizationRequirements;
 using TechStudy.RazorPages.Data;
 using TechStudy.RazorPages.Helpers;
 using TechStudy.RazorPages.Repositories;
@@ -28,13 +33,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("AdminPolicy", policyBuilder => policyBuilder.RequireClaim("Role", "Admin"));
+    options.AddPolicy("AdminPolicy", policyBuilder => policyBuilder.AddRequirements(new AdminRoleRequirement()));
 });
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton(new ApplicationIdentityClaims());
-
 builder.Services.AddRazorPages(op =>
 {
     op.Conventions.AuthorizeFolder("/AccountsManager", "AdminPolicy");
@@ -74,6 +78,21 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+app.Use(async (context, next) =>
+{
+
+    using (var serviceScope = app.Services.CreateScope())
+    {
+        var services = serviceScope.ServiceProvider;
+        UserManager<IdentityUser> userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+        var user = await userManager.FindByEmailAsync("mmmdov.sadiq@gmail.com");
+        var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+        await userManager.ConfirmEmailAsync(user, code);
+    }
+
+    await next.Invoke();
+});
 app.MapDelete("/claims", async ([FromQuery] string userId, [FromQuery] string type, [FromQuery] string value, IUserService userService) =>
 {
     var res = await userService.RemoveClaimAsync(userId, new(type, value));

@@ -22,7 +22,7 @@ public class IndexModel : PageModel
     public async Task<IActionResult> OnGetAsync()
     {
         Users = await _userService.GetAllAsync();
-
+        
         return Page();
     }
 }
