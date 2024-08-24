@@ -78,21 +78,6 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-app.Use(async (context, next) =>
-{
-
-    using (var serviceScope = app.Services.CreateScope())
-    {
-        var services = serviceScope.ServiceProvider;
-        UserManager<IdentityUser> userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-        var user = await userManager.FindByEmailAsync("mmmdov.sadiq@gmail.com");
-        var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-        await userManager.ConfirmEmailAsync(user, code);
-    }
-
-    await next.Invoke();
-});
 app.MapDelete("/claims", async ([FromQuery] string userId, [FromQuery] string type, [FromQuery] string value, IUserService userService) =>
 {
     var res = await userService.RemoveClaimAsync(userId, new(type, value));
