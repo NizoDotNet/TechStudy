@@ -86,7 +86,7 @@ app.MapDelete("/claims", async ([FromQuery] string userId, [FromQuery] string ty
         return Results.Ok();
     }
     return Results.Problem();
-});
+}).RequireAuthorization("AdminPolicy");
 
 
 app.Run();
