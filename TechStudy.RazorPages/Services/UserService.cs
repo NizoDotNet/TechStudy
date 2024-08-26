@@ -74,7 +74,7 @@ public class UserService : IUserService
         }
         var userClaims = await _userManager.GetClaimsAsync(user); 
         var claim = userClaims.Where(c => c.Type == type).FirstOrDefault();
-        return claim ?? new(type, string.Empty);
+        return claim;
     }
 
     public async Task<Claim> GetClaimAsync(IdentityUser user, string type)

@@ -44,7 +44,7 @@ public class ManageModel : PageModel
         {
             res = await _userService.AddClaimAsync(SelectedUserId, new(ClaimType, ClaimValue));
         }
-        if (res) return RedirectToPage("Index");
+        if (res) return RedirectToPage("Index", new { userId = SelectedUserId });
         return BadRequest();
     }
 }
