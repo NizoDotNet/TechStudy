@@ -42,6 +42,13 @@ builder.Services.AddSingleton(new ApplicationIdentityClaims());
 builder.Services.AddRazorPages(op =>
 {
     op.Conventions.AuthorizeFolder("/AccountsManager", "AdminPolicy");
+    op.Conventions.AuthorizeAreaFolder("Identity", "/Account", "AdminPolicy");
+    op.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/Register");
+    op.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/Login");
+    op.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/Logout");
+    op.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/AccessDenied");
+
+
 });
 builder.Services.Configure<IdentityOptions>(o =>
 {
