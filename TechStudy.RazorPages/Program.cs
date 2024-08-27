@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,8 @@ using System.Text;
 using TechStudy.RazorPages.AuthorizationRequirements;
 using TechStudy.RazorPages.Data;
 using TechStudy.RazorPages.Helpers;
+using TechStudy.RazorPages.Helpers.Middlewares;
+using TechStudy.RazorPages.Helpers.Options;
 using TechStudy.RazorPages.Repositories;
 using TechStudy.RazorPages.Services;
 
@@ -39,6 +42,8 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton(new ApplicationIdentityClaims());
+
+builder.Services.AddScoped<IEmailSender, MailKitEmailSender>();
 builder.Services.AddRazorPages(op =>
 {
     op.Conventions.AuthorizeFolder("/AccountsManager", "AdminPolicy");
@@ -63,7 +68,7 @@ builder.Services.Configure<IdentityOptions>(o =>
     o.SignIn.RequireConfirmedEmail = false;
     o.SignIn.RequireConfirmedAccount = false;
 });
-
+builder.Services.Configure<EmailOption>(builder.Configuration.GetSection("EmailOption"));
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -82,6 +87,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandler>();
 
 app.MapRazorPages();
 
