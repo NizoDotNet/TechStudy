@@ -15,5 +15,6 @@ function deleteClaim(userId, claimType, claimValue) {
                 console.error("Claim was not deleted");
             }
         })
+        .then(c => location.reload())
 
 }

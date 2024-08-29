@@ -33,11 +33,11 @@ public class MailKitEmailSender : IEmailSender
         };
 
         using var client = new SmtpClient();
-        await client.ConnectAsync("smtp.gmail.com", 465, true);
+        await client.ConnectAsync(fromInfo.SMPTPServer, 465, true);
 
         await client.AuthenticateAsync(fromInfo.Email, fromInfo.Password);
         _logger.LogInformation("Sending message to {Email}", email);
-        await client.SendAsync(message);
+        var res = await client.SendAsync(message);
         await client.DisconnectAsync(true);
 
 

@@ -16,7 +16,7 @@ public class ExceptionHandler : IMiddleware
         }
         catch (Exception ex) 
         {
-            _logger.LogInformation(
+            _logger.LogError(
                 "{Exception} in {Route}", 
                 ex.ToString(), 
                 context.Request.Path);

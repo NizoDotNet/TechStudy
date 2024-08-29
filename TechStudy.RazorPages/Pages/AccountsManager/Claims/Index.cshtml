@@ -1,7 +1,7 @@
 ﻿@page "{userId}"
 @model TechStudy.RazorPages.Pages.AccountsManager.Claims.IndexModel
 
-<a asp-page="Manage" class="btn">Manage</a>
+<a asp-page="Manage" asp-route-userId="@RouteData.Values["userId"]" class="btn text-white">Manage</a>
 
     
 <div class="row">

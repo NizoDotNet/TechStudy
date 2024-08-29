@@ -1,13 +1,9 @@
-﻿@page
+﻿@page "{userId}"
 @model TechStudy.RazorPages.Pages.AccountsManager.Claims.ManageModel
 @{
 }
 <form method="post">
-    <div class="row mb-3">
-        <select class="form-select" asp-items="Model.UserSelectList" asp-for="SelectedUserId">
-            <option></option>
-        </select>
-    </div>
+    <input readonly hidden asp-for="UserId" value="@Model.IdentityUser.Id" />
     <div class="row mb-3">
         <label class="form-label">Claim Type</label>
         <input class="form-control" asp-for="ClaimType" />

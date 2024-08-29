@@ -16,35 +16,33 @@ public class ManageModel : PageModel
         _userService = userService;
     }
 
-    public SelectList UserSelectList { get; set; }
+    public IdentityUser IdentityUser { get; set; }
     [BindProperty]
-    public string SelectedUserId { get; set; }
+    public string UserId { get; set; }
     [BindProperty]
     public string ClaimType { get; set; }
     [BindProperty]
     public string ClaimValue { get; set; }
-    public async Task<IActionResult> OnGetAsync()
+    public async Task<IActionResult> OnGetAsync(string userId)
     {
-        var users = await _userService.GetAllAsync();
-        UserSelectList = new SelectList(users, nameof(IdentityUser.Id), nameof(IdentityUser.Email));
-
+        IdentityUser = await _userService.GetAsync(userId);
         return Page();
     }
     public async Task<IActionResult> OnPostAsync()
     {
         Claim claim = new(ClaimType, ClaimValue);
-        Claim oldClaim = await _userService.GetClaimAsync(SelectedUserId, ClaimType);
+        Claim oldClaim = await _userService.GetClaimAsync(UserId, ClaimType);
         bool res = false;
         if (oldClaim is not null) 
         {
-            res = await _userService.ReplaceClaimAsync(SelectedUserId, oldClaim, claim);
+            res = await _userService.ReplaceClaimAsync(UserId, oldClaim, claim);
             
         }
         else
         {
-            res = await _userService.AddClaimAsync(SelectedUserId, new(ClaimType, ClaimValue));
+            res = await _userService.AddClaimAsync(UserId, new(ClaimType, ClaimValue));
         }
-        if (res) return RedirectToPage("Index", new { userId = SelectedUserId });
+        if (res) return RedirectToPage("Index", new { userId = UserId });
         return BadRequest();
     }
 }

@@ -42,6 +42,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton(new ApplicationIdentityClaims());
+builder.Services.AddTransient<ExceptionHandler>();
 
 builder.Services.AddScoped<IEmailSender, MailKitEmailSender>();
 builder.Services.AddRazorPages(op =>
