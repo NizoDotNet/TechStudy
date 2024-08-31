@@ -49,7 +49,7 @@
     margin-right: 10%;
 }
 
-.main1 button {
+.main1 button, a-btn {
     border: none;
     border-radius: 20px;
     background-color: #a7d90189;

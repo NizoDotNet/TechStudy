@@ -23,12 +23,13 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnGetAsync()
     {
-        _logger.LogWarning("{User} with ID {ID} in Accounts Manager", 
-            User.Identity!.Name, 
+        _logger.LogWarning("{User} with ID {ID} in Accounts Manager",
+            User.Identity!.Name,
             User.FindFirstValue(ClaimTypes.NameIdentifier));
 
         Users = await _userService.GetAllAsync();
-        
+
         return Page();
     }
+
 }

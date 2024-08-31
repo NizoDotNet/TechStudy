@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Security.Claims;
 using System.Text;
 using TechStudy.RazorPages.AuthorizationRequirements;
@@ -38,6 +39,9 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminPolicy", policyBuilder => policyBuilder.AddRequirements(new AdminRoleRequirement()));
 });
+
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -93,11 +97,18 @@ app.UseMiddleware<ExceptionHandler>();
 
 app.MapRazorPages();
 
-app.MapDelete("/claims", async ([FromQuery] string userId, [FromQuery] string type, [FromQuery] string value, IUserService userService) =>
+app.MapDelete("/claims", async ([FromQuery] string userId, 
+    [FromQuery] string type, 
+    [FromQuery] string value, 
+    IUserService userService,
+    HttpContext context) =>
 {
     var res = await userService.RemoveClaimAsync(userId, new(type, value));
     if (res)
     {
+        app.Logger.LogWarning("User's claim with {type} {value} " +
+                    "was deleted by {AdminEmail}. User's {userId}",
+                    type, value, context.User.FindFirstValue(ClaimTypes.Email), userId);
         return Results.Ok();
     }
     return Results.Problem();

@@ -10,10 +10,11 @@ namespace TechStudy.RazorPages.Pages.AccountsManager.Claims;
 public class ManageModel : PageModel
 {
     private readonly IUserService _userService;
-
-    public ManageModel(IUserService userService)
+    private readonly ILogger<ManageModel> _logger;
+    public ManageModel(IUserService userService, ILogger<ManageModel> logger)
     {
         _userService = userService;
+        _logger = logger;
     }
 
     public IdentityUser IdentityUser { get; set; }
@@ -33,16 +34,21 @@ public class ManageModel : PageModel
         Claim claim = new(ClaimType, ClaimValue);
         Claim oldClaim = await _userService.GetClaimAsync(UserId, ClaimType);
         bool res = false;
-        if (oldClaim is not null) 
+        if (oldClaim is not null)
         {
             res = await _userService.ReplaceClaimAsync(UserId, oldClaim, claim);
-            
+
         }
         else
         {
             res = await _userService.AddClaimAsync(UserId, new(ClaimType, ClaimValue));
         }
-        if (res) return RedirectToPage("Index", new { userId = UserId });
+        if (res)
+        {
+            _logger.LogWarning("{Claim} was added to {UserId} by {AdminEmail}", 
+                claim, UserId, User.FindFirstValue(ClaimTypes.Email));
+            return RedirectToPage("Index", new { userId = UserId });
+        }
         return BadRequest();
     }
 }

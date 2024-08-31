@@ -21,6 +21,5 @@ public interface IUserService
     Task<Claim> GetClaimAsync(IdentityUser user, string type);
     Task<IEnumerable<Claim>> GetClaimsAsync(string userId);
     Task<IEnumerable<Claim>> GetClaimsAsync(IdentityUser user);
-    Task<IEnumerable<IdentityUser>> GetUsersAsync();
     
 }
