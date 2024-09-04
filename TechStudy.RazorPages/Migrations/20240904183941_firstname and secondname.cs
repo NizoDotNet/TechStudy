@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace TechStudy.RazorPages.Migrations
 {
     /// <inheritdoc />
-    public partial class first : Migration
+    public partial class firstnameandsecondname : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,6 +35,9 @@ namespace TechStudy.RazorPages.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false),
+                    FirstName = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
+                    SecondName = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
+                    AboutMe = table.Column<string>(type: "longtext", nullable: false),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),

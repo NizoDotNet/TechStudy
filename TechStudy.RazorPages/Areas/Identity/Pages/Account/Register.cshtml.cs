@@ -130,15 +130,15 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                Claim firstNameClaim = _claims.CreateFirstName(Input.FirstName);
-                Claim secondNameClaim = _claims.CreateSecondName(Input.SecondName);
+                user.FirstName = Input.FirstName;
+                user.SecondName = Input.SecondName;
                 Claim role = _claims.UserRole();
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    await _userManager.AddClaimsAsync(user, [firstNameClaim, secondNameClaim, role]);
+                    await _userManager.AddClaimAsync(user, role);
                     _logger.LogInformation("Claims Added");
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

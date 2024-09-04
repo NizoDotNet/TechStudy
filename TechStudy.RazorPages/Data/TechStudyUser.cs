@@ -1,9 +1,18 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace TechStudy.RazorPages.Data;
 
 public class TechStudyUser : IdentityUser
 {
-    public string Test { get; set; } = "Test";
+    [Required]
+    [MinLength(2)]
+    [MaxLength(20)]
+    public string FirstName { get; set; } = null!;
+    [Required]
+    [MinLength(2)]
+    [MaxLength(20)]
+    public string SecondName { get; set; } = null!;
+    public string? AboutMe { get; set; } 
 }

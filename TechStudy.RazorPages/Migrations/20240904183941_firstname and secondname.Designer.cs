@@ -11,8 +11,8 @@ using TechStudy.RazorPages.Data;
 namespace TechStudy.RazorPages.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240904150950_Test 2")]
-    partial class Test2
+    [Migration("20240904183941_firstname and secondname")]
+    partial class firstnameandsecondname
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -159,6 +159,10 @@ namespace TechStudy.RazorPages.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("AboutMe")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
@@ -172,6 +176,11 @@ namespace TechStudy.RazorPages.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -196,11 +205,12 @@ namespace TechStudy.RazorPages.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Test")
+                    b.Property<string>("SecondName")
                         .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
 
                     b.Property<bool>("TwoFactorEnabled")

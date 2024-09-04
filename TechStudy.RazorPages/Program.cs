@@ -76,6 +76,7 @@ builder.Services.Configure<IdentityOptions>(o =>
 builder.Services.Configure<EmailOption>(builder.Configuration.GetSection("EmailOption"));
 var app = builder.Build();
 
+
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();

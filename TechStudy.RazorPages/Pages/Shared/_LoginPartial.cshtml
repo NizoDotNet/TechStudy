@@ -2,12 +2,15 @@
 @using System.Security.Claims
 @inject SignInManager<TechStudyUser> SignInManager
 @inject UserManager<TechStudyUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
 
+}
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
-        <a  class="nav-link text-white" asp-page="/Account/Index" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" title="Manage">@User.FindFirst("SecondName")!.Value</a>
+        <a  class="nav-link text-white" asp-page="/Account/Index" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value" title="Manage">@user.FirstName</a>
     </li>
     @if(User.HasClaim("Role", "Admin"))
     {   

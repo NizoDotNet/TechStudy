@@ -36,10 +36,10 @@
                     @user.Id
                 </td>
                 <td>
-                    @((await Model.UserService.GetClaimAsync(user, "FirstName")).Value)
+                   @user.FirstName
                 </td>
                 <td>
-                    @((await Model.UserService.GetClaimAsync(user, "SecondName")).Value)
+                    @user.SecondName
                 </td>
                 <td>
                     @user.Email

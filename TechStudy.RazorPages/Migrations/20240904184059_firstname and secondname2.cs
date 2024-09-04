@@ -5,7 +5,7 @@
 namespace TechStudy.RazorPages.Migrations
 {
     /// <inheritdoc />
-    public partial class test : Migration
+    public partial class firstnameandsecondname2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

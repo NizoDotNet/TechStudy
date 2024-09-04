@@ -20,8 +20,6 @@ public class IndexModel : PageModel
 
     public IEnumerable<TechStudyUser> Users { get; set; }
 
-    public IUserService UserService => _userService;
-
     public async Task<IActionResult> OnGetAsync()
     {
         _logger.LogWarning("{User} with ID {ID} in Accounts Manager",
