@@ -1,5 +1,4 @@
-﻿
-namespace TechStudy.RazorPages.Helpers.Middlewares;
+﻿namespace TechStudy.RazorPages.Helpers.Middlewares;
 
 public class ExceptionHandler : IMiddleware
 {
