@@ -11,8 +11,8 @@ using TechStudy.RazorPages.Data;
 namespace TechStudy.RazorPages.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240820111825_first")]
-    partial class first
+    [Migration("20240904144355_test")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

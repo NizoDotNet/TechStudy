@@ -5,12 +5,12 @@
 
     
 <div class="row">
-    <h5>@Model.IdentityUser.Email</h5>
+    <h5>@Model.TechStudyUser.Email</h5>
     @foreach(var claim in Model.UserClaims)
     {
         <hr />
         <p>Claim Type: @claim.Type</p>
         <p>Claim Value: @claim.Value</p>
-        <button class="btn btn-danger" onclick="deleteClaim('@Model.IdentityUser.Id', '@claim.Type', '@claim.Value')">Delete</button>
+        <button class="btn btn-danger" onclick="deleteClaim('@Model.TechStudyUser.Id', '@claim.Type', '@claim.Value')">Delete</button>
     }
 </div>

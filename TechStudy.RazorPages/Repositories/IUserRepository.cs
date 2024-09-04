@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using TechStudy.RazorPages.Data;
 
 namespace TechStudy.RazorPages.Repositories;
 
 public interface IUserRepository
 {
-    Task<IdentityUser> GetAsync(string id);
-    Task<IEnumerable<IdentityUser>> GetAllAsync();
+    Task<TechStudyUser> GetAsync(string id);
+    Task<IEnumerable<TechStudyUser>> GetAllAsync();
     Task<bool> Delete(string id);
-    Task<bool> UpdateAsync(string id, IdentityUser updatedUser);
-    Task<bool> CreateUser(IdentityUser user); 
+    Task<bool> UpdateAsync(string id, TechStudyUser updatedUser);
+    Task<bool> CreateUser(TechStudyUser user); 
 }

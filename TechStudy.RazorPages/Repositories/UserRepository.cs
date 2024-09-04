@@ -1,18 +1,19 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using TechStudy.RazorPages.Data;
 
 namespace TechStudy.RazorPages.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<TechStudyUser> _userManager;
 
-    public UserRepository(UserManager<IdentityUser> userManager)
+    public UserRepository(UserManager<TechStudyUser> userManager)
     {
         _userManager = userManager;
     }
 
-    public async Task<bool> CreateUser(IdentityUser user)
+    public async Task<bool> CreateUser(TechStudyUser user)
     {
         var res = await _userManager.CreateAsync(user);
         if (!res.Succeeded) 
@@ -33,18 +34,18 @@ public class UserRepository : IUserRepository
         return true;
     }
 
-    public async Task<IEnumerable<IdentityUser>> GetAllAsync()
+    public async Task<IEnumerable<TechStudyUser>> GetAllAsync()
     {
         return await _userManager.Users.ToListAsync();
     }
 
-    public async Task<IdentityUser> GetAsync(string id)
+    public async Task<TechStudyUser> GetAsync(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
         return user;
     }
 
-    public async Task<bool> UpdateAsync(string id, IdentityUser updatedUser)
+    public async Task<bool> UpdateAsync(string id, TechStudyUser updatedUser)
     {
         var user = await _userManager.FindByIdAsync(id);
         if (user is null) 

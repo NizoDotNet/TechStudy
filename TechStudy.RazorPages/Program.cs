@@ -33,7 +33,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseMySQL(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<TechStudyUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddAuthorization(options =>
 {
@@ -108,7 +108,9 @@ app.MapDelete("/claims", async ([FromQuery] string userId,
     {
         app.Logger.LogWarning("User's claim with {type} {value} " +
                     "was deleted by {AdminEmail}. User's {userId}",
-                    type, value, context.User.FindFirstValue(ClaimTypes.Email), userId);
+                    type, value, 
+                    context.User.FindFirstValue(ClaimTypes.Email), 
+                    userId);
         return Results.Ok();
     }
     return Results.Problem();

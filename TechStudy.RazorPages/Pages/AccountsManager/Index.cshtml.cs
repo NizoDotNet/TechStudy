@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
+using TechStudy.RazorPages.Data;
 using TechStudy.RazorPages.Services;
 
 namespace TechStudy.RazorPages.Pages.AccountsManager;
@@ -17,7 +18,7 @@ public class IndexModel : PageModel
         _logger = logger;
     }
 
-    public IEnumerable<IdentityUser> Users { get; set; }
+    public IEnumerable<TechStudyUser> Users { get; set; }
 
     public IUserService UserService => _userService;
 

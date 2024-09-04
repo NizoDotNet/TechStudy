@@ -2,16 +2,17 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Client;
 using System.Security.Claims;
+using TechStudy.RazorPages.Data;
 using TechStudy.RazorPages.Repositories;
 
 namespace TechStudy.RazorPages.Services;
 
 public class UserService : IUserService
 {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<TechStudyUser> _userManager;
     private readonly IUserRepository _userRepository;
 
-    public UserService(UserManager<IdentityUser> userManager, IUserRepository userRepository)
+    public UserService(UserManager<TechStudyUser> userManager, IUserRepository userRepository)
     {
         _userManager = userManager;
         _userRepository = userRepository;
@@ -28,12 +29,12 @@ public class UserService : IUserService
         return res.Succeeded;
     }
 
-    public async Task<bool> AddClaimAsync(IdentityUser user, Claim claim)
+    public async Task<bool> AddClaimAsync(TechStudyUser user, Claim claim)
     {
         var res = await _userManager.AddClaimAsync(user, claim);
         return res.Succeeded;
     }
-    public async Task<bool> ReplaceClaimAsync(IdentityUser user, Claim oldClaim, Claim newClaim)
+    public async Task<bool> ReplaceClaimAsync(TechStudyUser user, Claim oldClaim, Claim newClaim)
     {
         var userClaims = await _userManager.GetClaimsAsync(user);
         if(userClaims.Where(c => c.Type == oldClaim.Type && c.Value == oldClaim.Value ).Any())
@@ -44,7 +45,7 @@ public class UserService : IUserService
         return false;
     }
 
-    public async Task<bool> CreateUser(IdentityUser user)
+    public async Task<bool> CreateUser(TechStudyUser user)
     {
         return await _userRepository.CreateUser(user);
     }
@@ -54,12 +55,12 @@ public class UserService : IUserService
         return await _userRepository.Delete(id);
     }
 
-    public async Task<IEnumerable<IdentityUser>> GetAllAsync()
+    public async Task<IEnumerable<TechStudyUser>> GetAllAsync()
     {
         return await _userRepository.GetAllAsync();
     }
 
-    public async Task<IdentityUser> GetAsync(string id)
+    public async Task<TechStudyUser> GetAsync(string id)
     {
         var user = await _userRepository.GetAsync(id);
         return user;
@@ -77,7 +78,7 @@ public class UserService : IUserService
         return claim;
     }
 
-    public async Task<Claim> GetClaimAsync(IdentityUser user, string type)
+    public async Task<Claim> GetClaimAsync(TechStudyUser user, string type)
     {
         var userClaims = await _userManager.GetClaimsAsync(user);
         var claim = userClaims.Where(c => c.Type == type).FirstOrDefault();
@@ -91,12 +92,12 @@ public class UserService : IUserService
         return await _userManager.GetClaimsAsync(user);
     }
 
-    public async Task<IEnumerable<Claim>> GetClaimsAsync(IdentityUser user)
+    public async Task<IEnumerable<Claim>> GetClaimsAsync(TechStudyUser user)
     {
         return await _userManager.GetClaimsAsync(user);
     }
 
-    public async Task<IEnumerable<IdentityUser>> GetUsersAsync()
+    public async Task<IEnumerable<TechStudyUser>> GetUsersAsync()
     {
         return await _userRepository.GetAllAsync();
     }
@@ -146,7 +147,7 @@ public class UserService : IUserService
     }
 
 
-    public async Task<bool> UpdateAsync(string id, IdentityUser updatedUser)
+    public async Task<bool> UpdateAsync(string id, TechStudyUser updatedUser)
     {
         return await _userRepository.UpdateAsync(id, updatedUser);
     }

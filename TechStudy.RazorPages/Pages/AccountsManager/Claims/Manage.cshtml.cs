@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
+using TechStudy.RazorPages.Data;
 using TechStudy.RazorPages.Services;
 
 namespace TechStudy.RazorPages.Pages.AccountsManager.Claims;
@@ -17,7 +18,7 @@ public class ManageModel : PageModel
         _logger = logger;
     }
 
-    public IdentityUser IdentityUser { get; set; }
+    public TechStudyUser TechStudyUser { get; set; }
     [BindProperty]
     public string UserId { get; set; }
     [BindProperty]
@@ -26,7 +27,7 @@ public class ManageModel : PageModel
     public string ClaimValue { get; set; }
     public async Task<IActionResult> OnGetAsync(string userId)
     {
-        IdentityUser = await _userService.GetAsync(userId);
+        TechStudyUser = await _userService.GetAsync(userId);
         return Page();
     }
     public async Task<IActionResult> OnPostAsync()

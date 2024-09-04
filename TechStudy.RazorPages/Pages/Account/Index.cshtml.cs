@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
+using TechStudy.RazorPages.Data;
 using TechStudy.RazorPages.Repositories;
 
 namespace TechStudy.RazorPages.Pages.Account;
@@ -16,7 +17,7 @@ public class IndexModel : PageModel
     }
 
     public bool IsCurrentUser { get; set; } = false;
-    public IdentityUser Account { get; set; }
+    public TechStudyUser Account { get; set; }
     public async Task<IActionResult> OnGetAsync(string id)
     {
         var user = await _userRepository.GetAsync(id);
