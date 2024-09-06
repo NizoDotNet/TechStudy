@@ -1,4 +1,9 @@
-﻿* {
+﻿:root {
+    --primary-color: #07255b;
+    --highlight-color: #a8d901;
+}
+
+* {
     margin: 0;
     padding: 0;
     font-size: 11px;
@@ -9,10 +14,19 @@
 }
 
 .main {
+    background-image: url("/images/backinformation-technology-minimalist-blue-xk9z8h5bore5jky6.jpg");
     background-color: var(--primary-color);
-    width: 100%;
+    width: auto;
     min-height: 100vh;
 }
+
+.signup {
+    background-color: var(--highlight-color);
+    border-radius: 20px;
+    padding: 10px;
+    margin-left: 4%;
+}
+
 .main1 {
     width: 92%;
     margin-left: 5%;
@@ -49,7 +63,7 @@
     margin-right: 10%;
 }
 
-.main1 button, .a-btn {
+.main1 button {
     border: none;
     border-radius: 20px;
     background-color: #a7d90189;
@@ -62,14 +76,6 @@
     width: 150px;
 }
 
-a.button {
-  text-decoration: none;
-  padding: 0.5rem;
-  border: 1px solid #333333;
-}
-
-}
-
 .columnn {
     flex-wrap: wrap;
     width: 100%;
@@ -79,16 +85,15 @@ a.button {
     flex-direction: column;
 }
 
-.columnn-1,
-.member-1 {
+.columnn-1, .member-1 {
+    box-shadow: 8px 7px 37px rgb(0, 0, 3);
     margin: 3%;
     height: auto;
     height: 300px;
     padding: 4%;
-    border-radius: 25px;
     color: aliceblue;
     text-shadow: 1px 1px 15px #07255b;
-    background-color: #a7d901d2;
+    background-color: #a7d901ae;
     opacity: 0;
     overflow: hidden;
     transform: translateY(40px);
@@ -101,9 +106,10 @@ a.button {
     }
 
 .columnn h2 {
+    max-width: 1000px;
     font-weight: bold;
     margin-top: 4%;
-    margin-left: 4%;
+    margin-left: 6%;
     color: aliceblue;
 }
 
@@ -116,12 +122,17 @@ a.button {
 
 .columnn-1:hover {
     transform: translateY(-20px);
+    background-color: #7fa110;
 }
+
+
+
+
 
 .member {
     flex-wrap: wrap;
-    width: 100%;
-    margin: 2% auto 0;
+    width: 99%;
+    margin: 2% 0 0 1%;
     height: auto;
     display: flex;
     justify-content: space-between;
@@ -130,7 +141,7 @@ a.button {
 
 .member-1 {
     width: 90%;
-    border-radius: 100px;
+    height: auto;
 }
 
     .member-1.slide-up {
@@ -148,6 +159,7 @@ a.button {
     display: flex;
     flex-wrap: wrap;
     height: auto;
+    margin-bottom: 5%;
 }
 
 .member-1:hover {
@@ -157,19 +169,16 @@ a.button {
 .team h2 {
     color: aliceblue;
     position: absolute;
-    font-size: 2rem; /* Adjust the font size */
-    font-weight: bold; /* Make the text bold */
-
-    margin: 2% auto 30% 5%;
-    padding: 0 20px; /* Add padding to the left and right */
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 2% auto 30% 8%;
+    padding: 0 20px;
     width: 100%;
     top: 1%;
     z-index: 10;
 }
 
-.pic1,
-.pic2,
-.pic3 {
+.pic1, .pic2, .pic3 {
     width: 100px;
     float: right;
     border-radius: 30px;
@@ -191,47 +200,48 @@ a.button {
     margin-top: 10%;
     overflow: hidden;
     width: 98%;
-    border-radius: 50px;
 }
 
 .team-slides {
     white-space: nowrap;
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    transition: all 0.5s ease-out;
 }
 
 .team-member {
+    box-shadow: 2px 2px 25px rgb(0, 0, 3);
     width: 300px;
     height: 200px;
-    background-color: aliceblue;
+    color: aliceblue;
+    background-color: rgba(253, 253, 253, 0.068);
     margin: 1%;
     box-sizing: border-box;
     padding: 2%;
-    border-radius: 30px;
 }
 
     .team-member:hover {
         transform: translateY(-2%);
         cursor: pointer;
-        transition: all 0.7s;
+        transition: all 0.7s ease-out;
     }
 
     .team-member img {
         width: 90%;
-        border-radius: 20px;
         margin: 2%;
         float: none;
     }
 
 .team-button {
-    background: #a7d901da;
-    color: aliceblue;
+    background-color: #07245b00;
     border: none;
     padding: 10px;
     cursor: pointer;
-    border-radius: 20px;
     margin: 2%;
 }
+
+    .team-button img {
+        width: 20px;
+    }
 
 .footer-bg {
     background-color: #051a41;
@@ -246,7 +256,17 @@ a.button {
     margin: 1%;
 }
 
+
+
+
 @media screen and (min-width: 768px) and (max-width: 1150px) {
+    * {
+        font-size: 16.5px;
+    }
+    .signup {
+        margin-left: 13%;
+    }
+
     .main1 {
         height: 440px;
         margin-left: 5%;
@@ -298,6 +318,23 @@ a.button {
 }
 
 @media screen and (min-width: 1150px) {
+    .nav a {
+        font-size: 18px;
+    }
+
+    .navimg11 {
+        margin-left: -15%;
+    }
+
+    .navimg10 {
+        margin-right: 5%;
+        width: 30px;
+    }
+
+    .signup {
+        margin-left: 5%;
+    }
+
     .main1 {
         height: 720px;
         border-radius: 50px;
@@ -333,7 +370,6 @@ a.button {
     .columnn .columnn-1 {
         max-width: 400px;
         font-size: 22px;
-        border-radius: 50px;
         flex: 1 1 calc(33.333% - 2%);
     }
 
@@ -354,6 +390,10 @@ a.button {
             margin: 2%;
             width: 250px;
         }
+
+    .team-button img {
+        width: 50px;
+    }
 
     .footer-bg {
         height: 280px;

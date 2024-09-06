@@ -1,28 +1,106 @@
 ﻿@page
 @model IndexModel
-
 @{
     ViewData["Title"] = "Home";
-    
+
 }
 
 <div class="main">
-    <div class="main1">
-        <div class="main1-content">
-            <div class="maintext">
-                <h1>Lorem ipsum</h1>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-                    tenetur reiciendis aliquid modi quo labore, eveniet vitae itaque
-                    assumenda vel harum minus pariatur quasi id iusto est, quisquam
-                    neque placeat?
-                </p>
+    <div class="carousel">
+        <!-- list item -->
+        <div class="list">
+            <div class="item">
+                <img src="~/images/bigstock.jpg" />
+                <div class="content">
+                    <div class="author">LUNDEV</div>
+                    <div class="title">Tech Study</div>
+                    <div class="topic">Bize qosul</div>
+                    <div class="des">
+                        <!-- lorem 50 -->
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
+                        sequi, rem magnam nesciunt minima placeat, itaque eum neque
+                        officiis unde, eaque optio ratione aliquid assumenda facere ab
+                        et quasi ducimus aut doloribus non numquam. Explicabo,
+                        laboriosam nisi reprehenderit tempora at laborum natus unde. Ut,
+                        exercitationem eum aperiam illo illum laudantium?
+                    </div>
+                    <div class="buttons">
+                        <button>DAHA ÇOX</button>
+                        <button>DAXİL OL</button>
+                    </div>
+                </div>
             </div>
-            <img src="~/images/logotechstudyes7878as.png" alt="" />
+            <div class="item">
+                <img src="~/images/info-tech-banner2.jpeg" />
+                <div class="content">
+                    <div class="author">LUNDEV</div>
+                    <div class="title">Tech Study</div>
+                    <div class="topic">Bize qosul</div>
+                    <div class="des">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
+                        sequi, rem magnam nesciunt minima placeat, itaque eum neque
+                        officiis unde, eaque optio ratione aliquid assumenda facere ab
+                        et quasi ducimus aut doloribus non numquam. Explicabo,
+                        laboriosam nisi reprehenderit tempora at laborum natus unde. Ut,
+                        exercitationem eum aperiam illo illum laudantium?
+                    </div>
+                    <div class="buttons">
+                        <button>DAHA ÇOX</button>
+                        <button>DAXİL OL</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="~/images/IS-landing_iStock-1177116437_resized.jpg" />
+                <div class="content">
+                    <div class="author">LUNDEV</div>
+                    <div class="title">Tech Study</div>
+                    <div class="topic">Bize qosul</div>
+                    <div class="des">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
+                        sequi, rem magnam nesciunt minima placeat, itaque eum neque
+                        officiis unde, eaque optio ratione aliquid assumenda facere ab
+                        et quasi ducimus aut doloribus non numquam. Explicabo,
+                        laboriosam nisi reprehenderit tempora at laborum natus unde. Ut,
+                        exer
+                    </div>
+                    <div class="buttons">
+                        <button>DAHA ÇOX</button>
+                        <button>DAXİL OL</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <form method="get">
-            <button asp-area="Identity" asp-page="/Account/Register" class="button a-btn">QEYDİYYATDAN KEÇ</button>
-        </form>
+        <!-- list thumnail -->
+        <div class="thumbnail">
+            <div class="item">
+                <img src="~/images/bigstock.jpg" />
+                <div class="content">
+                    <div class="title">Name Slider</div>
+                    <div class="description">Description</div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="~/images/info-tech-banner2.jpeg" />
+                <div class="content">
+                    <div class="title">Name Slider</div>
+                    <div class="description">Description</div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="~/images/IS-landing_iStock-1177116437_resized.jpg" />
+                <div class="content">
+                    <div class="title">Name Slider</div>
+                    <div class="description">Description</div>
+                </div>
+            </div>
+        </div>
+        <!-- next prev -->
+
+        <div class="arrows">
+            <button id="prev"><</button>
+            <button id="next">></button>
+        </div>
     </div>
 
     <div class="columnn" id="column-section">
@@ -60,44 +138,48 @@
 
     <div class="team">
         <h2>Bizim heyət</h2>
-        <button class="team-button" onclick="moveSlide(-1)">Sola çevir</button>
+        <button class="team-button" onclick="moveSlide(-1)">
+            <img src="~/images/angle-left.png" alt="" />
+        </button>
         <div class="team-container">
             <div class="team-slides">
                 <div class="team-member">
-                    <img src="~/images/monkey.jpg" alt="" class="pic1" />
+                    <img src="~/images/humanjpg.jpg" alt="" class="pic1" />
                     Lorem ipsum dolor
                 </div>
                 <div class="team-member">
-                    <img src="~/images/dogs1.png" alt="" class="pic1" />
+                    <img src="~/images/human6.jpg" alt="" class="pic1" />
                     Lorem ipsum dolor
                 </div>
                 <div class="team-member">
-                    <img src="~/images/cat.jpg" alt="" class="pic1" />
+                    <img src="~/images/human143f22fab3233c.jpg" alt="" class="pic1" />
                     Lorem ipsum dolor
                 </div>
                 <div class="team-member">
-                    <img src="~/images/monkey.jpg" alt="" class="pic1" />
+                    <img src="~/images/humanad.jpg" alt="" class="pic1" />
                     Lorem ipsum dolor
                 </div>
                 <div class="team-member">
-                    <img src="~/images/dogs1.png" alt="" class="pic1" />
+                    <img src="~/images/humanjpg.jpg" alt="" class="pic1" />
                     Lorem ipsum dolor
                 </div>
                 <div class="team-member">
-                    <img src="~/images/monkey.jpg" alt="" class="pic1" />
+                    <img src="~/images/human143f22fab3233c.jpg" alt="" class="pic1" />
                     Lorem ipsum dolor
                 </div>
                 <div class="team-member">
-                    <img src="~/images/monkey.jpg" alt="" class="pic1" />
+                    <img src="~/images/humanPAyejG1.jpg" alt="" class="pic1" />
                     Lorem ipsum dolor.
                 </div>
                 <div class="team-member">
-                    <img src="~/images/monkey.jpg" alt="" class="pic1" />
+                    <img src="~/images/humanad.jpg" alt="" class="pic1" />
                     Lorem ipsum dolor
                 </div>
             </div>
         </div>
-        <button class="team-button" onclick="moveSlide(1)">Sağa çevir</button>
+        <button class="team-button" onclick="moveSlide(1)">
+            <img src="~/images/angle-right.png" alt="" />
+        </button>
     </div>
 
     <div class="member" id="column-section">
