@@ -59,15 +59,14 @@ a {
             margin-left: 5px;
         }
 
-        .carousel .list .item .buttons {
+        .carousel .list .item .buttons form {
             display: grid;
             grid-template-columns: repeat(2, 130px);
             grid-template-rows: 40px;
             gap: 5px;
             margin-top: 20px;
         }
-
-            .carousel .list .item .buttons button {
+            .carousel .list .item .buttons form button {
                 border: none;
                 padding: 5px;
                 background-color: #eee;
@@ -77,11 +76,11 @@ a {
                 font-weight: 500;
             }
 
-                .carousel .list .item .buttons button:nth-child(2) {
-                    background-color: transparent;
-                    border: 1px solid #fff;
-                    color: #eee;
-                }
+            .carousel .list .item .buttons form:nth-child(2) button {
+                background-color: transparent;
+                border: 1px solid #fff;
+                color: #eee;
+            }
 /* thumbail */
 .thumbnail {
     position: absolute;
