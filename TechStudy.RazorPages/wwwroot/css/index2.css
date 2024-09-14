@@ -20,63 +20,12 @@
     min-height: 100vh;
 }
 
-.nav {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 1%;
-    width: 100%;
-    padding: 0px;
-    background-color: var(--primary-color);
-}
-
-    .nav .navimg {
-        width: 45px;
-        padding: 5px;
-    }
-
-.navimg11 {
-    margin-left: -2%;
-}
-
-.nav .navimg1:hover {
-    cursor: pointer;
-    background-color: #07255b;
-}
-
-.nav li {
-    padding: 5px;
-    text-decoration: none;
-}
-
-    .nav li a {
-        color: aliceblue;
-        padding: 5px;
-        text-decoration: none;
-        transition: all 0.6s;
-    }
-
 .signup {
     background-color: var(--highlight-color);
     border-radius: 20px;
     padding: 10px;
     margin-left: 4%;
 }
-
-.nav .signup a {
-    color: var(--primary-color);
-    padding: 10px;
-}
-
-.nav li:hover {
-    background-color: rgba(240, 248, 255, 0.702);
-    padding: 5px;
-    border-radius: 20px;
-}
-
-    .nav li:hover a {
-        color: var(--primary-color);
-    }
 
 .main1 {
     width: 92%;
@@ -314,19 +263,6 @@
     * {
         font-size: 16.5px;
     }
-
-    .nav a {
-        font-size: 15.4px;
-    }
-
-    .nav .navimg {
-        width: 40px;
-    }
-
-    .navimg11 {
-        width: 20px;
-    }
-
     .signup {
         margin-left: 13%;
     }

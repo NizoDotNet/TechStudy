@@ -20,7 +20,6 @@ public class ExceptionHandler : IMiddleware
                 ex.ToString(), 
                 context.Request.Path);
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            throw;
         }
     }
 

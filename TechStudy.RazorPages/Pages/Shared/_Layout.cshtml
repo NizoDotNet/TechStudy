@@ -14,27 +14,17 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <img src="~/images/teklogo1 (1).png" class="navimg" />    
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item text-white">
-                            <a class="nav-link text-white" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-page="/ContactUs">Contact Us</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
+        <nav>
+            <ul class="nav">
+                <li class="navimg1 navimg10"><img src="menu-burger.png" alt="" /></li>
+                <li class="navimg1 navimg11">
+                    <img src="~/images/teklogo1 (1).png" alt="Logo" class="navimg" />
+                </li>
+                <li><a asp-area="" asp-page="/Index">Əsas səhifə</a></li>
+                <li><a asp-area="" asp-page="/Members">Üzvlər</a></li>
+                <li><a asp-area="" asp-page="/ContactUs">Bizimlə əlaqə</a></li>
+                <partial name="_CustomLoginPartial" />
+            </ul>
         </nav>
     </header>
     <div class="">
