@@ -1,12 +1,9 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.Security.Claims;
-using System.Text;
 using TechStudy.RazorPages.AuthorizationRequirements;
 using TechStudy.RazorPages.Data;
 using TechStudy.RazorPages.Helpers;
@@ -21,7 +18,7 @@ builder.Configuration.AddJsonFile("secrets.json");
 
 string connectionString = string.Empty;
 
-if(builder.Environment.IsDevelopment())
+if (builder.Environment.IsDevelopment())
 {
     connectionString = builder.Configuration.GetConnectionString("Local") ?? throw new Exception("No connection string");
 }
@@ -98,9 +95,9 @@ app.UseMiddleware<ExceptionHandler>();
 
 app.MapRazorPages();
 
-app.MapDelete("/claims", async ([FromQuery] string userId, 
-    [FromQuery] string type, 
-    [FromQuery] string value, 
+app.MapDelete("/claims", async ([FromQuery] string userId,
+    [FromQuery] string type,
+    [FromQuery] string value,
     IUserService userService,
     HttpContext context) =>
 {
@@ -109,8 +106,8 @@ app.MapDelete("/claims", async ([FromQuery] string userId,
     {
         app.Logger.LogWarning("User's claim with {type} {value} " +
                     "was deleted by {AdminEmail}. User's {userId}",
-                    type, value, 
-                    context.User.FindFirstValue(ClaimTypes.Email), 
+                    type, value,
+                    context.User.FindFirstValue(ClaimTypes.Email),
                     userId);
         return Results.Ok();
     }

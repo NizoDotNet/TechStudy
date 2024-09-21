@@ -30,10 +30,10 @@
     background-color: var(--primary-color);
 }
 
-    .nav .navimg {
-        width: 45px;
-        padding: 5px;
-    }
+.nav .navimg {
+    width: 45px;
+    padding: 5px;
+}
 
 .navimg11 {
     margin-left: -2%;

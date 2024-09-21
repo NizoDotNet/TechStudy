@@ -28,6 +28,8 @@ public class ManageModel : PageModel
     public async Task<IActionResult> OnGetAsync(string userId)
     {
         TechStudyUser = await _userService.GetAsync(userId);
+        if (TechStudyUser is null)
+            return NotFound();
         return Page();
     }
     public async Task<IActionResult> OnPostAsync()
