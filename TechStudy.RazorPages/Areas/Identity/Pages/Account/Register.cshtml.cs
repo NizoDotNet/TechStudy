@@ -34,13 +34,16 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly ApplicationIdentityClaims _claims;
+        private readonly IConfiguration _configuration;
+
         public RegisterModel(
             UserManager<TechStudyUser> userManager,
             IUserStore<TechStudyUser> userStore,
             SignInManager<TechStudyUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            ApplicationIdentityClaims claims)
+            ApplicationIdentityClaims claims,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -49,6 +52,7 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _claims = claims;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -111,6 +115,9 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required, MaxLength(255)]
+            public string About { get; set; }
         }
 
 
@@ -132,7 +139,19 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.FirstName = Input.FirstName;
                 user.SecondName = Input.SecondName;
-                Claim role = _claims.UserRole();
+                user.AboutMe = Input.About;
+
+                var section = _configuration.GetSection("AdminsGmails");
+                var adminsGmail = section.Get<string[]>();
+                Claim role = null;
+                if(adminsGmail.Contains(Input.Email))
+                {
+                    role = _claims.AdminRole();
+                }
+                else
+                {
+                    role = _claims.UserRole();  
+                }
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
