@@ -17,9 +17,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using TechStudy.RazorPages.Data;
+using TechStudy.RazorPages.Entities;
 using TechStudy.RazorPages.Helpers;
 using ZstdSharp.Unsafe;
 
@@ -35,7 +37,7 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly ApplicationIdentityClaims _claims;
         private readonly IConfiguration _configuration;
-
+        private readonly ApplicationDbContext _context;
         public RegisterModel(
             UserManager<TechStudyUser> userManager,
             IUserStore<TechStudyUser> userStore,
@@ -43,7 +45,8 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             ApplicationIdentityClaims claims,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -53,6 +56,7 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _claims = claims;
             _configuration = configuration;
+            _context = context;
         }
 
         /// <summary>
@@ -115,12 +119,18 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            [Required]
+            public string Faculty { get; set; } = string.Empty;
+            [Required]
+            public string Specialization { get; set; } = string.Empty;
 
         }
 
-
+        public SelectList FacultiesList { get; set; }
         public async Task OnGetAsync(string returnUrl = null)
         {
+            List<string> facs = ["Engineering", "Economy"];
+            FacultiesList = new(facs);
             ReturnUrl = returnUrl;
             //ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -137,6 +147,8 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.FirstName = Input.FirstName;
                 user.SecondName = Input.SecondName;
+                user.Faculty = Input.Faculty;
+                user.Specialization = Input.Specialization;
 
                 var section = _configuration.GetSection("AdminsGmails");
                 var adminsGmail = section.Get<string[]>();

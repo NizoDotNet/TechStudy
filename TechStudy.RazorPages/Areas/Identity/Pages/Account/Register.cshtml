@@ -37,7 +37,14 @@
                     <label asp-for="Input.ConfirmPassword">Şifrəni təkrarlayın</label>
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
-                
+                <div class="form-floating mb-3">
+                    <select class="form-select" asp-items="Model.FacultiesList" asp-for="Input.Faculty"></select>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Specialization" class="form-control" autocomplete="Specialization" aria-required="true" placeholder="specialization" />
+                    <label asp-for="Input.Specialization">İxtisas</label>
+                </div>
+
                 <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Qeydiyyatdan keç</button>
             </form>
         </div>
