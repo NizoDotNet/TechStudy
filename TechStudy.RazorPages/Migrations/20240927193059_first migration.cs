@@ -34,7 +34,8 @@ namespace TechStudy.RazorPages.Migrations
                 name: "Groups",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(type: "longtext", nullable: false)
                 },
                 constraints: table =>
@@ -74,8 +75,7 @@ namespace TechStudy.RazorPages.Migrations
                     SecondName = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
                     Faculty = table.Column<string>(type: "longtext", nullable: false),
                     Specialization = table.Column<string>(type: "longtext", nullable: false),
-                    GroupId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    GroupId1 = table.Column<Guid>(type: "char(36)", nullable: true),
+                    GroupId = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
@@ -97,11 +97,6 @@ namespace TechStudy.RazorPages.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUsers_Groups_GroupId",
                         column: x => x.GroupId,
-                        principalTable: "Groups",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_Groups_GroupId1",
-                        column: x => x.GroupId1,
                         principalTable: "Groups",
                         principalColumn: "Id");
                 })
@@ -199,7 +194,7 @@ namespace TechStudy.RazorPages.Migrations
             migrationBuilder.InsertData(
                 table: "Groups",
                 columns: new[] { "Id", "Description" },
-                values: new object[] { new Guid("de8c2ccd-6dfb-4f8d-9177-37ec85fe4621"), "No Group" });
+                values: new object[] { 1, "No Group" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -236,11 +231,6 @@ namespace TechStudy.RazorPages.Migrations
                 name: "IX_AspNetUsers_GroupId",
                 table: "AspNetUsers",
                 column: "GroupId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_GroupId1",
-                table: "AspNetUsers",
-                column: "GroupId1");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",

@@ -11,7 +11,7 @@ using TechStudy.RazorPages.Data;
 namespace TechStudy.RazorPages.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240927192400_first migration")]
+    [Migration("20240927193059_first migration")]
     partial class firstmigration
     {
         /// <inheritdoc />
@@ -182,11 +182,8 @@ namespace TechStudy.RazorPages.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
 
-                    b.Property<Guid>("GroupId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("GroupId1")
-                        .HasColumnType("char(36)");
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -234,8 +231,6 @@ namespace TechStudy.RazorPages.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.HasIndex("GroupId1");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -248,9 +243,9 @@ namespace TechStudy.RazorPages.Migrations
 
             modelBuilder.Entity("TechStudy.RazorPages.Entities.Group", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -263,7 +258,7 @@ namespace TechStudy.RazorPages.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("de8c2ccd-6dfb-4f8d-9177-37ec85fe4621"),
+                            Id = 1,
                             Description = "No Group"
                         });
                 });
@@ -322,12 +317,8 @@ namespace TechStudy.RazorPages.Migrations
             modelBuilder.Entity("TechStudy.RazorPages.Data.TechStudyUser", b =>
                 {
                     b.HasOne("TechStudy.RazorPages.Entities.Group", "Group")
-                        .WithMany()
-                        .HasForeignKey("GroupId");
-
-                    b.HasOne("TechStudy.RazorPages.Entities.Group", null)
                         .WithMany("TechStudyUsers")
-                        .HasForeignKey("GroupId1");
+                        .HasForeignKey("GroupId");
 
                     b.Navigation("Group");
                 });

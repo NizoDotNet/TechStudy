@@ -22,7 +22,7 @@ namespace TechStudy.RazorPages.Data
             builder.ApplyConfiguration(new GroupConfiguration());
 
             builder.Entity<Group>()
-                .HasData([new(Guid.Parse("8275d12e-ef4e-4644-bd54-2778b976b9a9"), "No Group")]);
+                .HasData([new() { Id = 1, Description = "No Group"}]);
 
            
         }

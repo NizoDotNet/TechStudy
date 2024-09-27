@@ -8,8 +8,9 @@ namespace TechStudy.RazorPages.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Group> builder)
         {
-            builder.HasMany<TechStudyUser>()
+            builder.HasMany(c => c.TechStudyUsers)
                 .WithOne(c => c.Group)
+                .HasForeignKey(c => c.GroupId)
                 .IsRequired(false);
         }
     }
