@@ -1,0 +1,21 @@
+﻿@page
+@model TechStudy.RazorPages.Pages.AccountsManager.Groups.IndexModel
+@{
+}
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>Group Id</th>
+            <th>Group Description</th>
+        </tr>
+        @foreach(var group in Model.Groups)
+        {
+            <tr>
+                <td>@group.Id</td>
+                <td>@group.Description</td>
+            </tr>
+        }
+    </table>
+
+</div>
