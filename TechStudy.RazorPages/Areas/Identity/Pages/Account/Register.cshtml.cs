@@ -2,28 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
+using System.Text;
+using System.Text.Encodings.Web;
 using TechStudy.RazorPages.Data;
-using TechStudy.RazorPages.Entities;
 using TechStudy.RazorPages.Helpers;
-using ZstdSharp.Unsafe;
 
 namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
 {
@@ -153,13 +144,13 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
                 var section = _configuration.GetSection("AdminsGmails");
                 var adminsGmail = section.Get<string[]>();
                 Claim role = null;
-                if(adminsGmail.Contains(Input.Email))
+                if (adminsGmail.Contains(Input.Email))
                 {
                     role = _claims.AdminRole();
                 }
                 else
                 {
-                    role = _claims.UserRole();  
+                    role = _claims.UserRole();
                 }
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

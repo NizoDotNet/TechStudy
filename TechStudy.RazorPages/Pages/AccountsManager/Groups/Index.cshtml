@@ -1,6 +1,6 @@
 ﻿@page
-@model TechStudy.RazorPages.Pages.AccountsManager.Groups.IndexModel
-@{
+@model IndexModel
+@{ 
 }
 
 <div class="container">
@@ -14,8 +14,14 @@
             <tr>
                 <td>@group.Id</td>
                 <td>@group.Description</td>
+                <td><a class="btn text-white" asp-page="Group" asp-route-id="@group.Id">More</a></td>
             </tr>
         }
     </table>
 
 </div>
+<style>
+    tr {
+        color: white;
+    }
+</style>
