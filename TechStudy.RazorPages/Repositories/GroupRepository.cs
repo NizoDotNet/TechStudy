@@ -24,12 +24,18 @@ public class GroupRepository : IGroupRepository
 
     public async Task<IEnumerable<Group>> GetAllAsync()
     {
-        return await _db.Groups.ToListAsync();
+        return await _db.Groups
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public async Task<Group?> GetByIdAsync(int id)
     {
-        var group = await _db.Groups.FirstOrDefaultAsync(c => c.Id == id);
+        var group = await _db.Groups
+            .Include(c => c.TechStudyUsers)
+            .AsSplitQuery()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Id == id);
         return group;
     }
 

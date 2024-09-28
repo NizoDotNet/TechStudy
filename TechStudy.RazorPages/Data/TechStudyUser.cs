@@ -17,6 +17,6 @@ public class TechStudyUser : IdentityUser
     public string SecondName { get; set; } = null!;
     public string Faculty { get; set; } = string.Empty;
     public string Specialization { get; set; } = string.Empty;
-    public int GroupId { get; set; } = 1;
+    public int? GroupId { get; set; } = 1;
     public Group Group { get; set; } 
 }

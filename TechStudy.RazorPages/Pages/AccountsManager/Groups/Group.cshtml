@@ -1,4 +1,51 @@
 ﻿@page "{id:int}"
-@model TechStudy.RazorPages.Pages.AccountsManager.Groups.GroupModel
+@model GroupModel
 @{
 }
+
+<div class="container">
+    <p>Group ID: @Model.Group!.Id</p>
+    <p>Group Description: @Model.Group!.Description</p>
+    <p>Group members: </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Second Name</th>
+                <th>Faculty</th>
+                <th>Specialization</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var user in Model.Group.TechStudyUsers)
+            {
+                    var parms = new Dictionary<string, string>
+                    {
+                        { "groupId", Model.Group.Id.ToString() },
+                        { "userId", user.Id }
+                    };
+
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Email</td>
+                    <th>@user.FirstName</th>
+                    <th>@user.SecondName</th>
+                    <th>@user.Faculty</th>
+                    <th>@user.Specialization</th>
+                    <td><a class="text-white btn" asp-page="/Account/Index" asp-route-id="@user.Id">Check Account</a></td>
+                    <td><a class="text-white btn btn-danger" asp-page="RemoveAccount" asp-all-route-data="parms">Remove</a></td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<style>
+    tr {
+        color: white;
+    }
+</style>
