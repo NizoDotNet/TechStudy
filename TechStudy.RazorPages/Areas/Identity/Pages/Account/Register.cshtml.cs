@@ -77,11 +77,11 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
         {
             [Required]
             [MinLength(3)]
-            [Display(Name = "First Name")]
+            [Display(Name = "Ad")]
             public string FirstName { get; set; }
             [Required]
             [MinLength(3)]
-            [Display(Name = "Second Name")]
+            [Display(Name = "Soyad")]
             public string SecondName { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -91,13 +91,17 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
+            [Required]
+            [Phone]
+            [Display(Name = "Əlaqə nömrəsi")]
+            public string PhoneNumber { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Şifrədə simvolların sayı 6 dan çox və 100 dən az olmalıdır", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -108,7 +112,7 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
             /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Şifrələr eyni deyil")]
             public string ConfirmPassword { get; set; }
             [Required]
             public string Faculty { get; set; } = string.Empty;
@@ -120,7 +124,7 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
         public SelectList FacultiesList { get; set; }
         public async Task OnGetAsync(string returnUrl = null)
         {
-            List<string> facs = ["Engineering", "Economy"];
+            IEnumerable<string> facs = ["Mühəndislik", "İqtisadiyyat", "Digər"];
             FacultiesList = new(facs);
             ReturnUrl = returnUrl;
             //ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -136,6 +140,7 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                
                 user.FirstName = Input.FirstName;
                 user.SecondName = Input.SecondName;
                 user.Faculty = Input.Faculty;
@@ -159,6 +164,8 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
                     await _userManager.AddClaimAsync(user, role);
                     _logger.LogInformation("Claims Added");
+                    await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+                    _logger.LogInformation("{PhoneNumber} set {User}", Input.PhoneNumber, user.Email);
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

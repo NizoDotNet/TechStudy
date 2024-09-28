@@ -15,6 +15,7 @@ namespace TechStudy.RazorPages.Data
         }
 
         public DbSet<Group> Groups { get; set; }
+        public DbSet<ApplicationForMembership> Applications { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
