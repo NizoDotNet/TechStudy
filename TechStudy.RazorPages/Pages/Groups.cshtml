@@ -2,6 +2,9 @@
 @model TechStudy.RazorPages.Pages.GroupsModel
 @{
 }
+
+<h4>Qruplara qoşul və sikdir</h4>
+<i>İstək bir neçə günə baxılacaq. Sizin ancaq bir istəyiniz qəbul oluna bilər, yəni bir qrup istək göndərin, əks halda ən son istəyiniz qəbul olunacaq</i>
 <div class="container keep-footer-at-bottom">
     <table class="table">
         <tr>
@@ -14,6 +17,7 @@
             <tr>
                 <td>@group.Name</td>
                 <td>@group.Description</td>
+                <td><a class="btn text-white" asp-page="ApplyForMembership" asp-route-groupId="@group.Id">Üzv ol</a></td>
             </tr>
         }
     </table>

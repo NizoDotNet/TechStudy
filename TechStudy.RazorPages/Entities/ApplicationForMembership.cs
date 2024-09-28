@@ -1,8 +1,11 @@
-﻿namespace TechStudy.RazorPages.Entities;
+﻿using TechStudy.RazorPages.Data;
+
+namespace TechStudy.RazorPages.Entities;
 
 public class ApplicationForMembership
 {
     public int Id { get; set; }
-    public string UserId { get; set; } = null!;
     public int GroupId { get; set; }
+    public string TechStudyUserId { get; set; } = null!;
+    public TechStudyUser? TechStudyUser{ get; set; }
 }
