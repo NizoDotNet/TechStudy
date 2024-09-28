@@ -4,17 +4,23 @@
 }
 
 <div class="container">
+    <a class="btn btn-primary" asp-page="Create">Create Group</a>
     <table class="table">
         <tr>
             <th>Group Id</th>
+            <th>Group Name</th>
             <th>Group Description</th>
+            <th></th>
+            <th></th>
         </tr>
         @foreach(var group in Model.Groups)
         {
             <tr>
                 <td>@group.Id</td>
+                <td>@group.Name</td>
                 <td>@group.Description</td>
                 <td><a class="btn text-white" asp-page="Group" asp-route-id="@group.Id">More</a></td>
+                <td><a class="btn text-white" asp-page="Delete" asp-route-id="@group.Id">Delete</a></td>
             </tr>
         }
     </table>

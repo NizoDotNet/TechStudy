@@ -17,6 +17,6 @@ public class RemoveAccountModel : PageModel
     {
         var res = await _groupService.RemoveAccount(groupId, userId);
         if (res == 0) return BadRequest();
-        return RedirectToPage("/Index");
+        return RedirectToPage("Index");
     }
 }
