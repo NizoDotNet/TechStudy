@@ -1,4 +1,63 @@
 ﻿@page
-@model TechStudy.RazorPages.Pages.AccountsManager.Groups.ApplicationsModel
+@model ApplicationsModel
 @{
 }
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>UserId</th>
+                <th>User Email</th>
+                <th>User current group</th>
+                <th>Group which was applied for</th>
+                <th>Current status</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var application in Model.ApplicationsForMembership)
+            {
+                <tr>
+                    <td>
+                        @application.Id
+                    </td>
+                    <td>
+                        @application.TechStudyUserId
+                    </td>
+                    <td>
+                        @application.TechStudyUser.Email
+                    </td>
+                    @if (application.TechStudyUser.Group != null)
+                    {
+                        <td>
+                            @application.TechStudyUser.Group.Name
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td>
+                        @application.Group.Name
+                    </td>
+                    <td>
+                        @application.ApplicationStatus.Name
+                    </td>
+                    <td>
+                        <a class="btn" style="color: green" asp-page="ChangeApplicatonStatus" asp-page-handler="Accepted" asp-route-appId="@application.Id">Accept</a>
+                        <a class="btn" style="color: red" asp-page="ChangeApplicatonStatus" asp-page-handler="Rejected" asp-route-appId="@application.Id">>Reject</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    tr {
+        color: white;
+    }
+</style>

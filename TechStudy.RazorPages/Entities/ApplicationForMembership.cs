@@ -9,4 +9,6 @@ public class ApplicationForMembership
     public Group Group { get; set; }
     public string TechStudyUserId { get; set; } = null!;
     public TechStudyUser? TechStudyUser{ get; set; }
+    public int? ApplicationStatusId { get; set; } = 1;
+    public ApplicationStatus? ApplicationStatus { get; set; } 
 }

@@ -8,5 +8,5 @@ public interface IApplicationRepository
     Task<int> DeleteAsync(int id);
     Task<IEnumerable<ApplicationForMembership>> GetAllAsync();
     Task<ApplicationForMembership> GetByIdAsync(int id);
-    
+    Task<int> UpdateAsync(int id,  ApplicationForMembership updatedApplication);
 }

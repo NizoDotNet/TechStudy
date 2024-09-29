@@ -8,4 +8,5 @@ public interface IApplicationService
     Task<IEnumerable<ApplicationForMembership>> GetAllAsync();
     Task<int> DeleteAsync(int id);
     Task<int> InsertAsync(ApplicationForMembership applicationForMembership);
+    Task<int> SetNewStatus(int id, ApplicationStatus applicationStatus);
 }

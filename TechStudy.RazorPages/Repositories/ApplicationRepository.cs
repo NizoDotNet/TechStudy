@@ -25,18 +25,39 @@ public class ApplicationRepository : IApplicationRepository
     public async Task<IEnumerable<ApplicationForMembership>> GetAllAsync()
     {
         return await _db.Applications
+            .Include(c => c.TechStudyUser)
+                .ThenInclude(c => c.Group)
+            .Include(c => c.Group)
+            .Include(c => c.ApplicationStatus)
             .AsNoTracking()
             .ToListAsync(); 
     }
 
-    public async Task<ApplicationForMembership> GetByIdAsync(int id)
+    public async Task<ApplicationForMembership?> GetByIdAsync(int id)
     {
-        return await _db.Applications.FirstOrDefaultAsync(c => c.Id == id);
+        return await _db.Applications
+            .Include(c => c.TechStudyUser)
+                .ThenInclude(c => c.Group)
+            .Include(c => c.Group)
+            .Include(c => c.ApplicationStatus)
+            .AsSplitQuery()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Id == id);
     }
 
     public async Task<int> InsertAsync(ApplicationForMembership application)
     {
         await _db.Applications.AddAsync(application);
+        return await _db.SaveChangesAsync();
+    }
+
+    public async Task<int> UpdateAsync(int id, ApplicationForMembership updatedApplication)
+    {
+        var app = await _db.Applications.FirstOrDefaultAsync(c => c.Id == id);
+        if (app is null)
+            return 0;
+
+        app.ApplicationStatusId = updatedApplication.ApplicationStatusId;
         return await _db.SaveChangesAsync();
     }
 }

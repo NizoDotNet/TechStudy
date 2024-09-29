@@ -37,4 +37,25 @@ public class ApplicationService : IApplicationService
         user.ApplicationId = applicationForMembership.Id;
         return await _applicationRepository.InsertAsync(applicationForMembership);
     }
+
+    public async Task<int> SetNewStatus(int id, ApplicationStatus applicationStatus)
+    {
+        var application = await _applicationRepository.GetByIdAsync(id);
+        if (applicationStatus is null)
+            return 0;
+        
+        application.ApplicationStatusId = applicationStatus.Id;
+        var res = await _applicationRepository.UpdateAsync(id, application);
+
+        if (res == 0)
+            return 0;
+        if(application.ApplicationStatusId == 1)
+        {
+            var user = await _userService.GetAsync(application.TechStudyUserId);
+            user.GroupId = application.GroupId;
+            user.ApplicationId = null;
+            user.ApplicationForMembership = null;
+        }
+        return res;
+    }
 }
