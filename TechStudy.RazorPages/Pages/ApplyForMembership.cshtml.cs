@@ -3,23 +3,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 using TechStudy.RazorPages.Repositories;
+using TechStudy.RazorPages.Services;
 
 namespace TechStudy.RazorPages.Pages;
 
 [Authorize]
 public class ApplyForMembershipModel : PageModel
 {
-    private readonly IApplicationRepository _applicationRepository;
+    private readonly IApplicationService _applicationService;
 
-    public ApplyForMembershipModel(IApplicationRepository applicationRepository)
+    public ApplyForMembershipModel(IApplicationService applicationService)
     {
-        _applicationRepository = applicationRepository;
+        _applicationService = applicationService;
     }
 
     public async Task<IActionResult> OnGetAsync(int groupId)
     {
-        string currentUserId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        await _applicationRepository.InsertAsync(new() { GroupId = groupId, TechStudyUserId = currentUserId });
+        string currentUserId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+        await _applicationService.InsertAsync(new() { GroupId = groupId, TechStudyUserId = currentUserId });
         return RedirectToPage("Groups");
     }
 }

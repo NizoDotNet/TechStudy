@@ -22,10 +22,7 @@ namespace TechStudy.RazorPages.Data
 
             builder.ApplyConfiguration(new GroupConfiguration());
 
-            builder.Entity<ApplicationForMembership>()
-                .HasOne<TechStudyUser>(c => c.TechStudyUser)
-                .WithOne(c => c.ApplicationForMembership)
-                .IsRequired(false);
+            builder.ApplyConfiguration(new ApplicationConfiguration());
 
             builder.Entity<Group>()
                 .HasData([new() { Id = 1, Description = "Heçbir qrupda iştirak etmirsiz.", Name = "No Group"}]);

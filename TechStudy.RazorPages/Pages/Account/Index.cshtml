@@ -6,7 +6,14 @@
 {
     <h2>It's your account</h2>
     <a asp-area="Identity" asp-page="/Account/Manage/Index">Manage your profile</a>
-
+    @if(Model.Account.Group != null)
+    {
+        <p>Qrup: @Model.Account.Group.Name</p>
+    }
+    @if (Model.Account.ApplicationForMembership != null)
+    {
+        <p>İstək: @Model.Account.ApplicationForMembership.Group.Name</p>
+    }
 }
 else
 {

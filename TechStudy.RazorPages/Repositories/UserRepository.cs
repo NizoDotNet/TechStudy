@@ -7,10 +7,11 @@ namespace TechStudy.RazorPages.Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly UserManager<TechStudyUser> _userManager;
-
-    public UserRepository(UserManager<TechStudyUser> userManager)
+    private readonly ApplicationDbContext _db;
+    public UserRepository(UserManager<TechStudyUser> userManager, ApplicationDbContext db)
     {
         _userManager = userManager;
+        _db = db;
     }
 
     public async Task<bool> CreateUser(TechStudyUser user)
@@ -41,7 +42,13 @@ public class UserRepository : IUserRepository
 
     public async Task<TechStudyUser> GetAsync(string id)
     {
-        var user = await _userManager.FindByIdAsync(id);
+        var user = await _db.Users
+            .Include(c => c.Group)
+            .Include(c => c.ApplicationForMembership)
+                .ThenInclude(c => c.Group)
+            .AsSplitQuery()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Id == id);
         return user;
     }
 

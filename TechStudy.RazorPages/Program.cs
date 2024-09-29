@@ -47,6 +47,9 @@ builder.Services.AddTransient<ExceptionHandler>();
 builder.Services.AddScoped<IGroupRepository,  GroupRepository>();
 builder.Services.AddScoped<IGroupService, GroupService>();
 builder.Services.AddScoped<IEmailSender, MailKitEmailSender>();
+builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
+builder.Services.AddScoped<IApplicationService, ApplicationService>();
+
 builder.Services.AddRazorPages(op =>
 {
     op.Conventions.AuthorizeFolder("/AccountsManager", "AdminPolicy");

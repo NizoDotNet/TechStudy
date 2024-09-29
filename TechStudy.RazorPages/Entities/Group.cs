@@ -9,4 +9,5 @@ public class Group
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
     public ICollection<TechStudyUser> TechStudyUsers { get; private set; } = [];
+    public ICollection<ApplicationForMembership> Applications { get; set; } = [];
 }
