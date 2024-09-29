@@ -1,4 +1,5 @@
-﻿using TechStudy.RazorPages.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using TechStudy.RazorPages.Data;
 using TechStudy.RazorPages.Entities;
 using TechStudy.RazorPages.Repositories;
 
@@ -8,10 +9,12 @@ public class ApplicationService : IApplicationService
 {
     private readonly IApplicationRepository _applicationRepository;
     private readonly IUserService _userService;
-    public ApplicationService(IApplicationRepository applicationRepository, IUserService userService)
+    private readonly ApplicationDbContext _db;
+    public ApplicationService(IApplicationRepository applicationRepository, IUserService userService, ApplicationDbContext db)
     {
         _applicationRepository = applicationRepository;
         _userService = userService;
+        _db = db;
     }
 
     public async Task<int> DeleteAsync(int id)
@@ -34,28 +37,29 @@ public class ApplicationService : IApplicationService
         var user = await _userService.GetAsync(applicationForMembership.TechStudyUserId);
         if (user == null)
             return 0;
-        user.ApplicationId = applicationForMembership.Id;
         return await _applicationRepository.InsertAsync(applicationForMembership);
     }
 
-    public async Task<int> SetNewStatus(int id, ApplicationStatus applicationStatus)
+    public async Task<int> SetNewStatus(int id, ApplicationStatusId applicationStatus)
     {
         var application = await _applicationRepository.GetByIdAsync(id);
-        if (applicationStatus is null)
+        if (application is null)
             return 0;
         
-        application.ApplicationStatusId = applicationStatus.Id;
+        application.ApplicationStatusId = (int)applicationStatus;
         var res = await _applicationRepository.UpdateAsync(id, application);
 
-        if (res == 0)
-            return 0;
-        if(application.ApplicationStatusId == 1)
+        if (applicationStatus == ApplicationStatusId.Accepted)
         {
-            var user = await _userService.GetAsync(application.TechStudyUserId);
+            var user = await _db.Users.FirstOrDefaultAsync(c => c.Id == application.TechStudyUserId);
+            if (user == null)
+            {
+                return 0;
+            }
             user.GroupId = application.GroupId;
-            user.ApplicationId = null;
-            user.ApplicationForMembership = null;
+            res += await _db.SaveChangesAsync();
         }
+        
         return res;
     }
 }

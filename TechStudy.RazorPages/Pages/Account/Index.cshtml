@@ -1,22 +1,47 @@
 ﻿@page "{id}"
 @model IndexModel
-@{
-}
-@if(Model.IsCurrentUser)
-{
-    <h2>It's your account</h2>
-    <a asp-area="Identity" asp-page="/Account/Manage/Index">Manage your profile</a>
-    @if(Model.Account.Group != null)
-    {
-        <p>Qrup: @Model.Account.Group.Name</p>
-    }
-    @if (Model.Account.ApplicationForMembership != null)
-    {
-        <p>İstək: @Model.Account.ApplicationForMembership.Group.Name</p>
-    }
-}
-else
-{
-    <h2>It's <b>NOT</b> your account</h2>
 
-}
+<div class="container">
+    @if(Model.IsCurrentUser)
+    {
+        <h2>It's your account</h2>
+        <a asp-area="Identity" asp-page="/Account/Manage/Index">Manage your profile</a>
+        @if(Model.Account.Group != null)
+        {
+            <p>Qrup: @Model.Account.Group.Name</p>
+        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>İstək göndərilən qrup</th>
+                    <th>İstəyin statusu</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var app in Model.Account.ApplicationsForMembership)
+                {
+                    <tr>
+                        <td>
+                            @app.Group.Name
+                        </td>
+                        <td>
+                            @app.ApplicationStatus.Name
+                        </td>
+                    </tr>
+                    
+                }
+            </tbody>
+            
+        </table>
+    }
+    else
+    {
+        <h2>It's <b>NOT</b> your account</h2>
+
+    }
+</div>
+<style>
+    tr {
+        color: white;
+    }
+</style>

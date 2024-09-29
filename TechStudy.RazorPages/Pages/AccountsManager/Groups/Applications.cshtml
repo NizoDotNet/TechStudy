@@ -15,6 +15,7 @@
                 <th>Current status</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -48,7 +49,12 @@
                     </td>
                     <td>
                         <a class="btn" style="color: green" asp-page="ChangeApplicatonStatus" asp-page-handler="Accepted" asp-route-appId="@application.Id">Accept</a>
-                        <a class="btn" style="color: red" asp-page="ChangeApplicatonStatus" asp-page-handler="Rejected" asp-route-appId="@application.Id">>Reject</a>
+                    </td>
+                    <td>
+                        <a class="btn" style="color: red" asp-page="ChangeApplicatonStatus" asp-page-handler="Rejected" asp-route-appId="@application.Id">Reject</a>
+                    </td>
+                    <td>
+                        <a class="btn text-white"  asp-page="ChangeApplicatonStatus" asp-page-handler="Delete" asp-route-appId="@application.Id">Delete</a>
                     </td>
                 </tr>
             }

@@ -1,6 +1,6 @@
 ﻿namespace TechStudy.RazorPages.Entities;
 
-enum ApplicationStatusId
+public enum ApplicationStatusId
 {
     Review = 1,
     Accepted,

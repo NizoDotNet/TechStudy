@@ -11,8 +11,8 @@ using TechStudy.RazorPages.Data;
 namespace TechStudy.RazorPages.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240929113644_ApplicationForMembership and group rel")]
-    partial class ApplicationForMembershipandgrouprel
+    [Migration("20240929172256_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -162,9 +162,6 @@ namespace TechStudy.RazorPages.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ApplicationId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
@@ -250,6 +247,9 @@ namespace TechStudy.RazorPages.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int?>("ApplicationStatusId")
+                        .HasColumnType("int");
+
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
@@ -258,12 +258,45 @@ namespace TechStudy.RazorPages.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationStatusId");
+
                     b.HasIndex("GroupId");
 
-                    b.HasIndex("TechStudyUserId")
-                        .IsUnique();
+                    b.HasIndex("TechStudyUserId");
 
                     b.ToTable("Applications");
+                });
+
+            modelBuilder.Entity("TechStudy.RazorPages.Entities.ApplicationStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Review"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Accepted"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Rejected"
+                        });
                 });
 
             modelBuilder.Entity("TechStudy.RazorPages.Entities.Group", b =>
@@ -355,6 +388,10 @@ namespace TechStudy.RazorPages.Migrations
 
             modelBuilder.Entity("TechStudy.RazorPages.Entities.ApplicationForMembership", b =>
                 {
+                    b.HasOne("TechStudy.RazorPages.Entities.ApplicationStatus", "ApplicationStatus")
+                        .WithMany()
+                        .HasForeignKey("ApplicationStatusId");
+
                     b.HasOne("TechStudy.RazorPages.Entities.Group", "Group")
                         .WithMany("Applications")
                         .HasForeignKey("GroupId")
@@ -362,8 +399,10 @@ namespace TechStudy.RazorPages.Migrations
                         .IsRequired();
 
                     b.HasOne("TechStudy.RazorPages.Data.TechStudyUser", "TechStudyUser")
-                        .WithOne("ApplicationForMembership")
-                        .HasForeignKey("TechStudy.RazorPages.Entities.ApplicationForMembership", "TechStudyUserId");
+                        .WithMany("ApplicationsForMembership")
+                        .HasForeignKey("TechStudyUserId");
+
+                    b.Navigation("ApplicationStatus");
 
                     b.Navigation("Group");
 
@@ -372,7 +411,7 @@ namespace TechStudy.RazorPages.Migrations
 
             modelBuilder.Entity("TechStudy.RazorPages.Data.TechStudyUser", b =>
                 {
-                    b.Navigation("ApplicationForMembership");
+                    b.Navigation("ApplicationsForMembership");
                 });
 
             modelBuilder.Entity("TechStudy.RazorPages.Entities.Group", b =>

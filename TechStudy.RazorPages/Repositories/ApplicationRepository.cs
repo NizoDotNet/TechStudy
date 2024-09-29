@@ -29,6 +29,8 @@ public class ApplicationRepository : IApplicationRepository
                 .ThenInclude(c => c.Group)
             .Include(c => c.Group)
             .Include(c => c.ApplicationStatus)
+            .OrderBy(c => c.DateTime)
+            .OrderBy(c => c.ApplicationStatusId)
             .AsNoTracking()
             .ToListAsync(); 
     }

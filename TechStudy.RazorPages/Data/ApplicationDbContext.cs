@@ -24,6 +24,12 @@ namespace TechStudy.RazorPages.Data
             builder.ApplyConfiguration(new GroupConfiguration());
             builder.ApplyConfiguration(new ApplicationConfiguration());
 
+            builder.Entity<TechStudyUser>()
+                .HasMany(c => c.ApplicationsForMembership)
+                .WithOne(c => c.TechStudyUser)
+                .HasForeignKey(c => c.TechStudyUserId)
+                .IsRequired(false);
+
             builder.Entity<Group>()
                 .HasData([new() { Id = 1, Description = "Heçbir qrupda iştirak etmirsiz.", Name = "No Group"}]);
 

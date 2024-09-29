@@ -159,9 +159,6 @@ namespace TechStudy.RazorPages.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ApplicationId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
@@ -250,6 +247,9 @@ namespace TechStudy.RazorPages.Migrations
                     b.Property<int?>("ApplicationStatusId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
@@ -262,8 +262,7 @@ namespace TechStudy.RazorPages.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.HasIndex("TechStudyUserId")
-                        .IsUnique();
+                    b.HasIndex("TechStudyUserId");
 
                     b.ToTable("Applications");
                 });
@@ -400,8 +399,8 @@ namespace TechStudy.RazorPages.Migrations
                         .IsRequired();
 
                     b.HasOne("TechStudy.RazorPages.Data.TechStudyUser", "TechStudyUser")
-                        .WithOne("ApplicationForMembership")
-                        .HasForeignKey("TechStudy.RazorPages.Entities.ApplicationForMembership", "TechStudyUserId");
+                        .WithMany("ApplicationsForMembership")
+                        .HasForeignKey("TechStudyUserId");
 
                     b.Navigation("ApplicationStatus");
 
@@ -412,7 +411,7 @@ namespace TechStudy.RazorPages.Migrations
 
             modelBuilder.Entity("TechStudy.RazorPages.Data.TechStudyUser", b =>
                 {
-                    b.Navigation("ApplicationForMembership");
+                    b.Navigation("ApplicationsForMembership");
                 });
 
             modelBuilder.Entity("TechStudy.RazorPages.Entities.Group", b =>

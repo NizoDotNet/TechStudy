@@ -44,8 +44,10 @@ public class UserRepository : IUserRepository
     {
         var user = await _db.Users
             .Include(c => c.Group)
-            .Include(c => c.ApplicationForMembership)
+            .Include(c => c.ApplicationsForMembership)
                 .ThenInclude(c => c.Group)
+            .Include(c => c.ApplicationsForMembership)
+                .ThenInclude(c => c.ApplicationStatus)
             .AsSplitQuery()
             .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Id == id);

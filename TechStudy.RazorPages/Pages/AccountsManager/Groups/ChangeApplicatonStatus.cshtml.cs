@@ -16,15 +16,22 @@ public class ChangeApplicatonStatus : PageModel
 
     public async Task<IActionResult> OnGetAcceptedAsync(int appId)
     {
-        var res = await _applicationService.SetNewStatus(appId, new() { Id = (int)ApplicationStatusId.Accepted });
+        var res = await _applicationService.SetNewStatus(appId, ApplicationStatusId.Accepted);
         if (res == 0)
             return BadRequest();
         return RedirectToPage("Applications");
     }
     public async Task<IActionResult> OnGetRejectedAsync(int appId)
     {
-        var res = await _applicationService.SetNewStatus(appId, new() { Id = (int)ApplicationStatusId.Rejected });
+        var res = await _applicationService.SetNewStatus(appId, ApplicationStatusId.Rejected);
         if (res == 0)
+            return BadRequest();
+        return RedirectToPage("Applications");
+    }
+    public async Task<IActionResult> OnGetDeleteAsync(int appId)
+    {
+        var res = await _applicationService.DeleteAsync(appId);
+        if(res == 0)
             return BadRequest();
         return RedirectToPage("Applications");
     }

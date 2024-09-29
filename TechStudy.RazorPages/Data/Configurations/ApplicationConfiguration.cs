@@ -8,10 +8,7 @@ public class ApplicationConfiguration : IEntityTypeConfiguration<ApplicationForM
 {
     public void Configure(EntityTypeBuilder<ApplicationForMembership> builder)
     {
-        builder
-            .HasOne<TechStudyUser>(c => c.TechStudyUser)
-            .WithOne(c => c.ApplicationForMembership)
-            .IsRequired(false);
+        
 
         builder
             .HasOne<Group>(c => c.Group)

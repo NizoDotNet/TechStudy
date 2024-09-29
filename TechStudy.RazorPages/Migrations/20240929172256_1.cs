@@ -4,15 +4,31 @@ using MySql.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TechStudy.RazorPages.Migrations
 {
     /// <inheritdoc />
-    public partial class firstmigration : Migration
+    public partial class _1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ApplicationStatuses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationStatuses", x => x.Id);
+                })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
@@ -36,6 +52,7 @@ namespace TechStudy.RazorPages.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false),
                     Description = table.Column<string>(type: "longtext", nullable: false)
                 },
                 constraints: table =>
@@ -75,7 +92,7 @@ namespace TechStudy.RazorPages.Migrations
                     SecondName = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
                     Faculty = table.Column<string>(type: "longtext", nullable: false),
                     Specialization = table.Column<string>(type: "longtext", nullable: false),
-                    GroupId = table.Column<int>(type: "int", nullable: false),
+                    GroupId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
@@ -99,6 +116,38 @@ namespace TechStudy.RazorPages.Migrations
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id");
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Applications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    GroupId = table.Column<int>(type: "int", nullable: false),
+                    TechStudyUserId = table.Column<string>(type: "varchar(255)", nullable: true),
+                    ApplicationStatusId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Applications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Applications_ApplicationStatuses_ApplicationStatusId",
+                        column: x => x.ApplicationStatusId,
+                        principalTable: "ApplicationStatuses",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Applications_AspNetUsers_TechStudyUserId",
+                        column: x => x.TechStudyUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Applications_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -192,9 +241,34 @@ namespace TechStudy.RazorPages.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.InsertData(
+                table: "ApplicationStatuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Review" },
+                    { 2, "Accepted" },
+                    { 3, "Rejected" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Groups",
-                columns: new[] { "Id", "Description" },
-                values: new object[] { 1, "No Group" });
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[] { 1, "Heçbir qrupda iştirak etmirsiz.", "No Group" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Applications_ApplicationStatusId",
+                table: "Applications",
+                column: "ApplicationStatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Applications_GroupId",
+                table: "Applications",
+                column: "GroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Applications_TechStudyUserId",
+                table: "Applications",
+                column: "TechStudyUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -243,6 +317,9 @@ namespace TechStudy.RazorPages.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Applications");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -256,6 +333,9 @@ namespace TechStudy.RazorPages.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "ApplicationStatuses");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
