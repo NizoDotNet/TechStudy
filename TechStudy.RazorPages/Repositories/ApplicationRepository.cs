@@ -18,7 +18,7 @@ public class ApplicationRepository : IApplicationRepository
         var query = _db.Applications.AsQueryable();
         if(userId != null)
         {
-            query.Where(c => c.TechStudyUserId  == userId);
+            query = query.Where(c => c.TechStudyUserId  == userId);
         }
         return await query
             .Where(c => c.Id == id)
