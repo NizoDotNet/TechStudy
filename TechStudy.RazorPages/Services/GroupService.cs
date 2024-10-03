@@ -20,9 +20,9 @@ public class GroupService : IGroupService
         return await _groupRepository.DeleteAsync(id);
     }
 
-    public async Task<IEnumerable<Group>> GetAllAsync()
+    public async Task<IEnumerable<Group>> GetAllAsync(int pageNumber = 1, int pageSize = 10)
     {
-        return await _groupRepository.GetAllAsync();
+        return await _groupRepository.GetAllAsync(pageNumber, pageSize);
     }
 
     public async Task<Group> GetByIdAsync(int id)

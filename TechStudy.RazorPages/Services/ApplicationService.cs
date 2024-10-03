@@ -17,14 +17,14 @@ public class ApplicationService : IApplicationService
         _db = db;
     }
 
-    public async Task<int> DeleteAsync(int id)
+    public async Task<int> DeleteAsync(int id, string? userId = null)
     {
-        return await _applicationRepository.DeleteAsync(id);
+        return await _applicationRepository.DeleteAsync(id, userId);
     }
 
-    public async Task<IEnumerable<ApplicationForMembership>> GetAllAsync()
+    public async Task<IEnumerable<ApplicationForMembership>> GetAllAsync(string? userId = null)
     {
-        return await _applicationRepository.GetAllAsync();
+        return await _applicationRepository.GetAllAsync(userId);
     }
 
     public async Task<ApplicationForMembership> GetByIdAsync(int id)

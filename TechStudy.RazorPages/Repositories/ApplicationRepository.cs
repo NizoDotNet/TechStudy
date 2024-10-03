@@ -13,18 +13,26 @@ public class ApplicationRepository : IApplicationRepository
         _db = db;
     }
 
-    public async Task<int> DeleteAsync(int id)
+    public async Task<int> DeleteAsync(int id, string? userId = null)
     {
-        var application = await _db.Applications.FirstOrDefaultAsync(c => c.Id == id);
-        if (application == null)
-            return 0;
-        _db.Applications.Remove(application);
-        return await _db.SaveChangesAsync();
+        var query = _db.Applications.AsQueryable();
+        if(userId != null)
+        {
+            query.Where(c => c.TechStudyUserId  == userId);
+        }
+        return await query
+            .Where(c => c.Id == id)
+            .ExecuteDeleteAsync();
     }
 
-    public async Task<IEnumerable<ApplicationForMembership>> GetAllAsync()
+    public async Task<IEnumerable<ApplicationForMembership>> GetAllAsync(string? userId = null)
     {
-        return await _db.Applications
+        var query = _db.Applications.AsSplitQuery();
+        if(userId != null)
+        {
+            query = query.Where(c => c.TechStudyUserId == userId);
+        }
+        return await query
             .Include(c => c.TechStudyUser)
                 .ThenInclude(c => c.Group)
             .Include(c => c.Group)

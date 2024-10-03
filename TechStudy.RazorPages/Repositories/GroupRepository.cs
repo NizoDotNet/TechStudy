@@ -22,9 +22,12 @@ public class GroupRepository : IGroupRepository
     }
 
 
-    public async Task<IEnumerable<Group>> GetAllAsync()
+    public async Task<IEnumerable<Group>> GetAllAsync(int pageNumber = 1, int pageSize = 10)
     {
         return await _db.Groups
+            .OrderBy(c => c.Id)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .AsNoTracking()
             .ToListAsync();
     }

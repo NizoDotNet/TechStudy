@@ -5,8 +5,8 @@ namespace TechStudy.RazorPages.Repositories;
 public interface IApplicationRepository
 {
     Task<int> InsertAsync(ApplicationForMembership application);
-    Task<int> DeleteAsync(int id);
-    Task<IEnumerable<ApplicationForMembership>> GetAllAsync();
+    Task<int> DeleteAsync(int id, string? userId = null);
+    Task<IEnumerable<ApplicationForMembership>> GetAllAsync(string? userId = null);
     Task<ApplicationForMembership> GetByIdAsync(int id);
     Task<int> UpdateAsync(int id,  ApplicationForMembership updatedApplication);
 }
