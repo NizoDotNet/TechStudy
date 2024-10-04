@@ -30,7 +30,20 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseMySQL(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<TechStudyUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<TechStudyUser>(o => 
+{
+    o.SignIn.RequireConfirmedAccount = true;
+    o.Password.RequiredUniqueChars = 2;
+    o.Password.RequireUppercase = false;
+    o.Password.RequireLowercase = false;
+    o.Password.RequireNonAlphanumeric = false;
+    o.Password.RequireDigit = false;
+    o.User.RequireUniqueEmail = true;
+
+    o.SignIn.RequireConfirmedPhoneNumber = false;
+    o.SignIn.RequireConfirmedEmail = false;
+    o.SignIn.RequireConfirmedAccount = false;
+})
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddAuthorization(options =>
 {
@@ -58,21 +71,12 @@ builder.Services.AddRazorPages(op =>
     op.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/Login");
     op.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/Logout");
     op.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/AccessDenied");
-
-
+    
 });
-builder.Services.Configure<IdentityOptions>(o =>
+builder.Services.ConfigureApplicationCookie(options =>
 {
-    o.Password.RequiredUniqueChars = 2;
-    o.Password.RequireUppercase = false;
-    o.Password.RequireLowercase = false;
-    o.Password.RequireNonAlphanumeric = false;
-    o.Password.RequireDigit = false;
-    o.User.RequireUniqueEmail = true;
+    options.LoginPath = "/Login";
 
-    o.SignIn.RequireConfirmedPhoneNumber = false;
-    o.SignIn.RequireConfirmedEmail = false;
-    o.SignIn.RequireConfirmedAccount = false;
 });
 builder.Services.Configure<EmailOption>(builder.Configuration.GetSection("EmailOption"));
 var app = builder.Build();
