@@ -10,7 +10,9 @@ public class ApplicationService : IApplicationService
     private readonly IApplicationRepository _applicationRepository;
     private readonly IUserService _userService;
     private readonly ApplicationDbContext _db;
-    public ApplicationService(IApplicationRepository applicationRepository, IUserService userService, ApplicationDbContext db)
+    public ApplicationService(IApplicationRepository applicationRepository, 
+        IUserService userService, 
+        ApplicationDbContext db)
     {
         _applicationRepository = applicationRepository;
         _userService = userService;
@@ -51,12 +53,18 @@ public class ApplicationService : IApplicationService
 
         if (applicationStatus == ApplicationStatusId.Accepted)
         {
-            var user = await _db.Users.FirstOrDefaultAsync(c => c.Id == application.TechStudyUserId);
+            var user = await _db.Users
+                .Include(c => c.ApplicationsForMembership)
+                .FirstOrDefaultAsync(c => c.Id == application.TechStudyUserId);
             if (user == null)
             {
                 return 0;
             }
             user.GroupId = application.GroupId;
+            await _db.Applications
+                .Where(c => c.TechStudyUserId == user.Id)
+                .Where(c => c.Id != application.Id)
+                .ExecuteDeleteAsync();
             res += await _db.SaveChangesAsync();
         }
         

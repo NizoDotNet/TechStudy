@@ -20,9 +20,14 @@ public class ApplicationRepository : IApplicationRepository
         {
             query = query.Where(c => c.TechStudyUserId  == userId);
         }
-        return await query
-            .Where(c => c.Id == id)
-            .ExecuteDeleteAsync();
+        var app = await query.FirstOrDefaultAsync(c => c.Id == id);
+        if(app == null)
+        {
+            return -1;
+        }
+
+        _db.Applications.Remove(app);
+        return await _db.SaveChangesAsync();
     }
 
     public async Task<IEnumerable<ApplicationForMembership>> GetAllAsync(string? userId = null)
