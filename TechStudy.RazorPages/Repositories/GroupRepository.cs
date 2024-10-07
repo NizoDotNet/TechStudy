@@ -7,18 +7,27 @@ namespace TechStudy.RazorPages.Repositories;
 public class GroupRepository : IGroupRepository
 {
     private readonly ApplicationDbContext _db;
-
-    public GroupRepository(ApplicationDbContext db)
+    private readonly ILogger<GroupRepository> _logger;
+    public GroupRepository(ApplicationDbContext db, ILogger<GroupRepository> logger)
     {
         _db = db;
+        _logger = logger;
     }
 
     public async Task<int> DeleteAsync(int id)
     {
+        _logger.LogInformation("Request for deleting Group with Id: {Id}", 
+            id);
         var group = await _db.Groups.FirstOrDefaultAsync(c => c.Id == id);
         if (group == null) return 0;
         _db.Groups.Remove(group);
-        return await _db.SaveChangesAsync();
+        int res = await _db.SaveChangesAsync();
+        if(res != 0)
+        {
+            _logger.LogInformation("Group Id: {Id} was deleted",
+                id);
+        }
+        return res;
     }
 
 
@@ -44,15 +53,32 @@ public class GroupRepository : IGroupRepository
 
     public async Task<int> InsertAsync(Group group)
     {
+        _logger.LogInformation("Adding group to db {Name}",
+            group.Name);
         await _db.Groups.AddAsync(group);
-        return await _db.SaveChangesAsync();
+        int res = await _db.SaveChangesAsync();
+        if (res != 0)
+        {
+           _logger.LogInformation("Group {Name} was added",
+                group.Name);
+        }
+        return res;
     }
 
-    public async Task<int> UpdateAsync(int Id, Group updated)
+    public async Task<int> UpdateAsync(int id, Group updated)
     {
-        var group = await _db.Groups.FirstOrDefaultAsync(_ => _.Id == Id);
+        _logger.LogInformation("Request to update group with Id: {Id}", id);
+        var group = await _db.Groups.FirstOrDefaultAsync(_ => _.Id == id);
         if(group == null) return 0;
+        group.Name = updated.Name;
         group.Description = updated.Description;
-        return await _db.SaveChangesAsync();
+        int res = await _db.SaveChangesAsync();
+        if(res != 0)
+        {
+            _logger.LogInformation("Group was updated. {NewName}, {NewDesc}", 
+                group.Name, group.Description);
+
+        }
+        return res;
     }
 }

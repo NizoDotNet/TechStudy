@@ -12,9 +12,10 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Email</th>
                 <th>First Name</th>
                 <th>Second Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
                 <th>Faculty</th>
                 <th>Specialization</th>
                 <th></th>
@@ -32,9 +33,10 @@
 
                 <tr>
                     <td>@user.Id</td>
-                    <td>@user.Email</td>
                     <th>@user.FirstName</th>
                     <th>@user.SecondName</th>
+                    <td>@user.Email</td>
+                    <td>@user.PhoneNumber</td>
                     <th>@user.Faculty</th>
                     <th>@user.Specialization</th>
                     <td><a class="text-white btn" asp-page="/Account/Index" asp-route-id="@user.Id">Check Account</a></td>
