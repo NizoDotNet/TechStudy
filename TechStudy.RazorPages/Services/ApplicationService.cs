@@ -24,9 +24,9 @@ public class ApplicationService : IApplicationService
         return await _applicationRepository.DeleteAsync(id, userId);
     }
 
-    public async Task<IEnumerable<ApplicationForMembership>> GetAllAsync(string? userId = null)
+    public async Task<IEnumerable<ApplicationForMembership>> GetAllAsync(string? userId = null, bool? onlyinreview = null)
     {
-        return await _applicationRepository.GetAllAsync(userId);
+        return await _applicationRepository.GetAllAsync(userId, onlyinreview);
     }
 
     public async Task<ApplicationForMembership> GetByIdAsync(int id)

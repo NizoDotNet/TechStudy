@@ -40,12 +40,16 @@ public class ApplicationRepository : IApplicationRepository
         return res;
     }
 
-    public async Task<IEnumerable<ApplicationForMembership>> GetAllAsync(string? userId = null)
+    public async Task<IEnumerable<ApplicationForMembership>> GetAllAsync(string? userId = null, bool? onlyinreview = null)
     {
         var query = _db.Applications.AsSplitQuery();
         if(userId != null)
         {
             query = query.Where(c => c.TechStudyUserId == userId);
+        }
+        if(onlyinreview != null)
+        {
+            query = query.Where(c => c.ApplicationStatusId == 1);
         }
         return await query
             .Include(c => c.TechStudyUser)

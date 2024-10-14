@@ -15,9 +15,9 @@ public class ApplicationsModel : PageModel
     }
 
     public IEnumerable<ApplicationForMembership> ApplicationsForMembership { get; set; }
-    public async Task<IActionResult> OnGetAsync()
+    public async Task<IActionResult> OnGetAsync(bool? onlyinreview = null)
     {
-        ApplicationsForMembership = await _applicationService.GetAllAsync();
+        ApplicationsForMembership = await _applicationService.GetAllAsync(onlyinreview: onlyinreview);
         return Page();
     }
 }
