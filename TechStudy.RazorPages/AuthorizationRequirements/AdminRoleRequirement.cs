@@ -25,7 +25,5 @@ public class AdminRoleRequirement : IAuthorizationRequirement, IAuthorizationHan
                 break;
             }
         }
-
-
     }
 }

@@ -1,0 +1,20 @@
+services:
+  techstudy.razorpages:
+    image: ${DOCKER_REGISTRY-}techstudyrazorpages
+    build:
+      context: .
+      dockerfile: TechStudy.RazorPages/Dockerfile
+    environment:
+        - connection_string= 
+  techstudy.database:
+    image: "mysql:latest"
+    container_name: "techstudy.database"
+    volumes:
+        - datafiles:/var/lib/mysql
+    restart: always
+    environment:
+        - MYSQL_ROOT_PASSWORD=nizo5dotnet
+        - MYSQL_DATABASE=techstudy.database
+    ports:
+        - 3306:3307 
+  

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechStudy", "TechStudy\Tech
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechStudy.RazorPages", "TechStudy.RazorPages\TechStudy.RazorPages.csproj", "{330A9D38-801F-420C-9D69-233FB5360741}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3BA1015B-BAF7-44AC-B97D-70CBF0B88D23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{330A9D38-801F-420C-9D69-233FB5360741}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{330A9D38-801F-420C-9D69-233FB5360741}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{330A9D38-801F-420C-9D69-233FB5360741}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BA1015B-BAF7-44AC-B97D-70CBF0B88D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA1015B-BAF7-44AC-B97D-70CBF0B88D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA1015B-BAF7-44AC-B97D-70CBF0B88D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BA1015B-BAF7-44AC-B97D-70CBF0B88D23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

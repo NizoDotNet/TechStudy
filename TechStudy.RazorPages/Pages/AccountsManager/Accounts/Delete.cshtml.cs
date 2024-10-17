@@ -21,13 +21,8 @@ public class DeleteModel : PageModel
             return NotFound();
         }
         var res = await _userService.Delete(id);
-        if(res)
-        {
-            _logger.LogWarning("{Email} was deleted as user by {AdminEmail}", 
-                user.Email, User.FindFirstValue(ClaimTypes.Email));
-            return RedirectToPage("Index");
-        }
-        return BadRequest();
+        
+        return RedirectToPage();
     }
 
 }
