@@ -9,11 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using TechStudy.RazorPages.Data;
+using TechStudy.RazorPages.Entities;
 using TechStudy.RazorPages.Helpers;
 
 namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
@@ -117,15 +119,17 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
             [Required]
             public string Faculty { get; set; } = string.Empty;
             [Required]
-            public string Specialization { get; set; } = string.Empty;
+            public int Specialization { get; set; } 
 
         }
 
         public SelectList FacultiesList { get; set; }
+        public SelectList SpecList { get; set; }
         public async Task OnGetAsync(string returnUrl = null)
         {
             IEnumerable<string> facs = ["Mühəndislik", "İqtisadiyyat", "Digər"];
             FacultiesList = new(facs);
+            SpecList = new(await _context.Specializations.ToListAsync(), nameof(Specialization.Id), nameof(Specialization.Name));
             ReturnUrl = returnUrl;
             //ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -144,7 +148,7 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.SecondName = Input.SecondName;
                 user.Faculty = Input.Faculty;
-                user.Specialization = Input.Specialization;
+                user.SpecializationId = Input.Specialization;
 
                 var section = _configuration.GetSection("AdminsGmails");
                 var adminsGmail = section.Get<string[]>();

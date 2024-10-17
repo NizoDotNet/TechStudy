@@ -48,6 +48,7 @@ public class UserRepository : IUserRepository
                 .ThenInclude(c => c.Group)
             .Include(c => c.ApplicationsForMembership)
                 .ThenInclude(c => c.ApplicationStatus)
+            .Include(c => c.Specialization)
             .AsSplitQuery()
             .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Id == id);

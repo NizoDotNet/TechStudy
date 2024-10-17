@@ -16,8 +16,9 @@ public class TechStudyUser : IdentityUser
     [MaxLength(20)]
     public string SecondName { get; set; } = null!;
     public string Faculty { get; set; } = string.Empty;
-    public string Specialization { get; set; } = string.Empty;
     public int? GroupId { get; set; } = 1;
-    public Group Group { get; set; }
+    public Group? Group { get; set; }
+    public int? SpecializationId { get; set; }
+    public Specialization? Specialization { get; set; }
     public ICollection<ApplicationForMembership> ApplicationsForMembership { get; set; } = [];
 }

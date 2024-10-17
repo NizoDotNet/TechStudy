@@ -12,6 +12,8 @@ namespace TechStudy.RazorPages.Data.Configurations
                 .WithOne(c => c.Group)
                 .HasForeignKey(c => c.GroupId)
                 .IsRequired(false);
+            builder.
+                HasData([new() { Id = 1, Description = "Heçbir qrupda iştirak etmirsiz.", Name = "No Group" }]);
         }
     }
 }
