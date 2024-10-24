@@ -117,18 +117,14 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "Şifrələr eyni deyil")]
             public string ConfirmPassword { get; set; }
             [Required]
-            public string Faculty { get; set; } = string.Empty;
-            [Required]
+            [Range(1, 3)]
             public int Specialization { get; set; } 
 
         }
 
-        public SelectList FacultiesList { get; set; }
         public SelectList SpecList { get; set; }
         public async Task OnGetAsync(string returnUrl = null)
         {
-            IEnumerable<string> facs = ["Mühəndislik", "İqtisadiyyat", "Digər"];
-            FacultiesList = new(facs);
             SpecList = new(await _context.Specializations.ToListAsync(), nameof(Specialization.Id), nameof(Specialization.Name));
             ReturnUrl = returnUrl;
             //ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -147,7 +143,6 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
                 
                 user.FirstName = Input.FirstName;
                 user.SecondName = Input.SecondName;
-                user.Faculty = Input.Faculty;
                 user.SpecializationId = Input.Specialization;
 
                 var section = _configuration.GetSection("AdminsGmails");

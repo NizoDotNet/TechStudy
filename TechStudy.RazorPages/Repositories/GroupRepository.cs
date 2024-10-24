@@ -18,7 +18,9 @@ public class GroupRepository : IGroupRepository
     {
         _logger.LogInformation("Request for deleting Group with Id: {Id}", 
             id);
-        var group = await _db.Groups.FirstOrDefaultAsync(c => c.Id == id);
+        var group = await _db.Groups
+            .Include(c => c.TechStudyUsers)
+            .FirstOrDefaultAsync(c => c.Id == id);
         if (group == null) return 0;
         _db.Groups.Remove(group);
         int res = await _db.SaveChangesAsync();

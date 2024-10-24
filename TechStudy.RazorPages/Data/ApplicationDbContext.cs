@@ -18,20 +18,26 @@ namespace TechStudy.RazorPages.Data
         public DbSet<ApplicationForMembership> Applications { get; set; }
         public DbSet<ApplicationStatus> ApplicationStatuses { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
+        public DbSet<Faculty> Faculties { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new GroupConfiguration());
             builder.ApplyConfiguration(new ApplicationConfiguration());
+            builder.ApplyConfiguration(new SpecializationConfiguration());
 
             builder.Entity<TechStudyUser>()
                 .HasMany(c => c.ApplicationsForMembership)
                 .WithOne(c => c.TechStudyUser)
                 .HasForeignKey(c => c.TechStudyUserId)
                 .IsRequired(false);
+
             builder.Entity<TechStudyUser>()
                 .HasOne(c => c.Specialization);
+
+            builder.Entity<Faculty>()
+                .HasData([new() { Id = 1, Text = "Other" }, new() { Id = 2, Text = "Engineering"}]);
 
             builder
                 .Entity<ApplicationStatus>()
@@ -39,7 +45,6 @@ namespace TechStudy.RazorPages.Data
                     new() {Id = 2, Name = "Accepted" }, 
                     new() { Id = 3, Name = "Rejected"}]);
 
-            builder.ApplyConfiguration(new SpecializationConfiguration());
         }
 
     }
