@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{pageNumber:int}"
 @model IndexModel
 @{ 
 }
@@ -26,7 +26,14 @@
             </tr>
         }
     </table>
-
+    <div class="d-flex alig-items-center justify-content-center">
+        @if (Model.PageNumber > 1)
+        {
+            <a asp-page="Index" class="btn btn-primary" asp-route-pagenumber='@(Model.PageNumber - 1)'>Prev</a>
+        }
+        
+        <a asp-page="Index" class="btn btn-primary" asp-route-pagenumber='@(Model.PageNumber + 1)'>Next</a>
+    </div>
 </div>
 <style>
     tr {
