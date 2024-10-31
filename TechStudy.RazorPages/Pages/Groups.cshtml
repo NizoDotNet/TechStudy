@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{pagenumber:int}"
 @model TechStudy.RazorPages.Pages.GroupsModel
 @{
 }
@@ -32,7 +32,14 @@
             </tr>
         }
     </table>
+    <div class="d-flex alig-items-center justify-content-center">
+        @if (Model.PageNumber > 1)
+        {
+            <a asp-page="Groups" class="btn btn-primary me-1" asp-route-pagenumber='@(Model.PageNumber - 1)'>Prev</a>
+        }
 
+        <a asp-page="Groups" class="btn btn-primary" asp-route-pagenumber='@(Model.PageNumber + 1)'>Next</a>
+    </div>
 </div>
 <style>
     tr {

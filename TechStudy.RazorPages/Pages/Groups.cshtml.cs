@@ -22,10 +22,12 @@ public class GroupsModel : PageModel
 
     public IEnumerable<Group> Groups { get; set; }
     public Dictionary<int, int> GroupAppIds { get; set; }
+    [FromRoute]
+    public int PageNumber { get; set; }
     public async Task OnGetAsync()
     {
         string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        Groups = await _groupRepository.GetAllAsync();
+        Groups = await _groupRepository.GetAllAsync(PageNumber);
         GroupAppIds = (await _applicationService.GetAllAsync(userId))
             .ToDictionary(c => c.GroupId, c => c.Id);  
     }
