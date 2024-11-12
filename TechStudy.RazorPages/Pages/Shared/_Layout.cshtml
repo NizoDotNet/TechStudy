@@ -5,65 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TechStudy.RazorPages</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TechStudy.RazorPages.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/contact.css" />
-    <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="stylesheet" href="~/css/index.css" />
-
+    <link rel="stylesheet" href="~/css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
+
 <body>
+    <a class="float" href="">
+        <i class="fa-brands fa-whatsapp my-float"></i>
+    </a>
     <header>
-        <nav>
-            <ul class="nav">
-                <li class="navimg1 navimg10"><img src="menu-burger.png" alt="" /></li>
-                <li class="navimg1 navimg11">
-                    <a asp-area="" asp-page="/Index">
-                        <img src="~/images/teklogo1 (1).png" alt="Logo" class="navimg" />
-                    </a>
-                </li>
-                <li><a asp-area="" asp-page="/Index">Əsas səhifə</a></li>
-                @* <li><a asp-area="" asp-page="/Members">Üzvlər</a></li> *@
-                <li><a asp-area="" asp-page="/ContactUs">Bizimlə əlaqə</a></li>
-                <partial name="_CustomLoginPartial" />
+        <div class="nav">
+            <div class="nav-brand">
+                <a href="" class="nav-logo">
+                    <h3><b><span>tech</span>study</b></h3>
+                </a>
+
+            </div>
+            <ul class="navlist" id="navlist">
+                <li><a href="html.html">Əsas səhifə</a></li>
+                <li><a href="#about">Haqqımızda</a></li>
+                <li><a href="#team-page">Üzvlər</a></li>
+                <li><a href="#contact">Əlaqə</a></li>
+                <li><a href="qruplar.html">Qruplar</a></li>
+                <div id="registr">
+                    <a href="daxilol.html"><button>Daxil Ol</button></a>
+                    <a href="qeydiyyat.html"><button class="btn1">Qeydiyyatdan Keç</button></a>
+
+                </div>
+
             </ul>
-        </nav>
+
+            <div class="registr">
+                <a href="daxilol.html"><button>Daxil Ol</button></a>
+                <a href="qeydiyyat.html"><button class="btn1">Qeydiyyatdan Keç</button></a>
+            </div>
+            <span class="bar">
+                <i onclick="myFunction()" class="fa-solid fa-bars"></i>
+            </span>
+        </div>
     </header>
     <div class="">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    <footer class="footer-bg ">
-        <div class="container-fd">
-            <div class="row">
-                <div class="col-md-3 footimg">
-                    <img src="~/images/logotechstudyes7878as.png"
-                         alt="Tech Study Logo"
-                         class="footer-img" />
-                </div>
-                <div class="col text-md-end">
-                    <ul class="list-unstyled">
-                        <li>+994ghjk :Phone</li>
-                        <li>info@mhjkml;.org :Email</li>
-                        <li>
-                           <a class="text-decoration-none" href="https://maps.app.goo.gl/DJD6VzhVQJTE6pKh7">
-                                Azərbaycan Dövlət Aqrar Universiteti Mühəndislik korpusu
-                            </a>
-                             :Location
-                        </li>
-                    </ul>
-                </div>
+    <footer class="text-light pt-4 ">
+        <div class="container">
+            <div class="footer-logo">
+                <h1><b>tech<span>study</span></b></h1><br>
+                <h4>#BirlikdəZirvəyəDoğru</h4>
+            </div>
+            <div class="footer-icon">
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+                <a href=""><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+            <div class="footer-page">
+                <ul class="list-unstyled">
+                    <li><h5>Səhifələr</h5></li>
+                    <hr>
+                    <li><a href="html.html">Əsas səhifə</a></li>
+                    <li><a href="html.html">Haqqımızda</a></li>
+                    <li><a href="html.html#team-page">Üzvlər</a></li>
+                    <li><a href="html.html#contact">Əlaqə</a></li>
+                    <li><a href="qruplar.html">Qruplar</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <ul class="list-unstyled">
+                    <li><h5>Bizimlə əlaqə</h5></li>
+                    <hr>
+                    <li>Telefon: +1234567890</li>
+                    <li>Email:example@gmail.com</li>
+                    <li>Məkan: ADAU Mex korpus..</li>
+                </ul>
             </div>
         </div>
     </footer>
-    <div class="text-center mt-3">
-        <p>Copyright © 2024 Tech Study | Powered by ADAU</p>
+    <div class="container-fluid  text-dark">
+        <p class="mb-0">Copyright © 2024 Tech Study | Powered by ADAU</p>
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/javascript.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
 
+    <script>
+
+        ScrollReveal({
+            reset: true,
+            distance: '60px',
+            duration: 2000,
+            delay: 300
+
+        });
+        ScrollReveal().reveal('.main-text', { delay: 200, origin: 'right' });
+        ScrollReveal().reveal('.main-img', { delay: 200, origin: 'bottom' });
+        ScrollReveal().reveal('.col1', { delay: 200, origin: 'top' });
+        ScrollReveal().reveal('.col2', { delay: 200, origin: 'bottom' });
+        ScrollReveal().reveal('.col3', { delay: 200, origin: 'top' });
+        ScrollReveal().reveal('.team-mem', { delay: 200, origin: 'bottom' });
+        ScrollReveal().reveal('.card', { delay: 200, origin: 'left' });
+
+    </script>
+   
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

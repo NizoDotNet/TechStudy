@@ -21,6 +21,6 @@ public class DeleteApplicationModel : PageModel
     {
         await _applicationRepository.DeleteAsync(appId, User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-        return RedirectToPage("Groups");
+        return RedirectToPage("Groups", new { paganumber = 1 });
     }
 }

@@ -22,7 +22,7 @@ public class DeleteModel : PageModel
         }
         var res = await _userService.Delete(id);
         
-        return RedirectToPage();
+        return RedirectToPage("Index");
     }
 
 }
