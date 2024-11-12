@@ -58,7 +58,7 @@
                         <a class="btn" style="color: red" asp-page="ChangeApplicatonStatus" asp-page-handler="Rejected" asp-route-appId="@application.Id">Reject</a>
                     </td>
                     <td>
-                        <a class="btn text-white"  asp-page="ChangeApplicatonStatus" asp-page-handler="Delete" asp-route-appId="@application.Id">Delete</a>
+                        <a class="btn "  asp-page="ChangeApplicatonStatus" asp-page-handler="Delete" asp-route-appId="@application.Id">Delete</a>
                     </td>
                 </tr>
             }
@@ -66,8 +66,3 @@
     </table>
 </div>
 
-<style>
-    tr {
-        color: white;
-    }
-</style>

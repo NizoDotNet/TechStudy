@@ -38,16 +38,11 @@
                     <td>@user.Email</td>
                     <td>@user.PhoneNumber</td>
                     <th>@user.Specialization</th>
-                    <td><a class="text-white btn" asp-page="/Account/Index" asp-route-id="@user.Id">Check Account</a></td>
-                    <td><a class="text-white btn btn-danger" asp-page="RemoveAccount" asp-all-route-data="parms">Remove</a></td>
+                    <td><a class=" btn" asp-page="/Account/Index" asp-route-id="@user.Id">Check Account</a></td>
+                    <td><a class=" btn btn-danger" asp-page="RemoveAccount" asp-all-route-data="parms">Remove</a></td>
 
                 </tr>
             }
         </tbody>
     </table>
 </div>
-<style>
-    tr {
-        color: white;
-    }
-</style>

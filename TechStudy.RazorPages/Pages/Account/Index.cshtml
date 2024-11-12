@@ -24,9 +24,16 @@
                         <td>
                             @app.Group.Name
                         </td>
-                        <td>
-                            @app.ApplicationStatus.Name
-                        </td>
+                        @if(app.ApplicationStatus != null)
+                        {
+                            <td>
+                                @app.ApplicationStatus.Name
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
                     </tr>
                     
                 }
@@ -40,8 +47,3 @@
 
     }
 </div>
-<style>
-    tr {
-        color: white;
-    }
-</style>

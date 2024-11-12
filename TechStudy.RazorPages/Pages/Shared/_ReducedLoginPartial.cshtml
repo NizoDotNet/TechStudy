@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@inject SignInManager<TechStudyUser> SignInManager
+@inject UserManager<TechStudyUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+
+}
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-area="" asp-page="/Account/Index">@user.FirstName</a>
+    }
+    else
+    {
+        <a asp-area="Identity" asp-page="/Account/Login"><button>Daxil Ol</button></a>
+        <a asp-area="Identity" asp-page="/Account/Register"><button class="btn1">Qeydiyyatdan Keç</button></a>
+    }
+
+

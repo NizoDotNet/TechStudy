@@ -21,8 +21,8 @@
                 <td>@group.Id</td>
                 <td>@group.Name</td>
                 <td>@group.Description</td>
-                <td><a class="btn text-white" asp-page="Group" asp-route-id="@group.Id">More</a></td>
-                <td><a class="btn text-white" asp-page="Delete" asp-route-id="@group.Id">Delete</a></td>
+                <td><a class="btn " asp-page="Group" asp-route-id="@group.Id">More</a></td>
+                <td><a class="btn " asp-page="Delete" asp-route-id="@group.Id">Delete</a></td>
             </tr>
         }
     </table>
@@ -35,8 +35,3 @@
         <a asp-page="Index" class="btn btn-primary" asp-route-pagenumber='@(Model.PageNumber + 1)'>Next</a>
     </div>
 </div>
-<style>
-    tr {
-        color: white;
-    }
-</style>

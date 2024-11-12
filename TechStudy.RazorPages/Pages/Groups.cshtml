@@ -5,7 +5,7 @@
 
 <div class="container keep-footer-at-bottom">
     <h4>Qruplara qoşul və qesheng sozler</h4>
-    <i class="text-white">İstək bir neçə günə baxılacaq. Sizin ancaq bir istəyiniz qəbul oluna bilər, yəni bir qrup istək göndərin, əks halda ən son istəyiniz qəbul olunacaq</i>
+    <i class="">İstək bir neçə günə baxılacaq. Sizin ancaq bir istəyiniz qəbul oluna bilər, yəni bir qrup istək göndərin, əks halda ən son istəyiniz qəbul olunacaq</i>
     <table class="table">
         <tr>
             <th>Group Name</th>
@@ -26,7 +26,7 @@
                 else
                 {
                     <td>
-                        <a class="btn text-white" asp-page="ApplyForMembership" asp-route-groupId="@group.Id">Üzv ol</a>
+                        <a class="btn " asp-page="ApplyForMembership" asp-route-groupId="@group.Id">Üzv ol</a>
                     </td>
                 }
             </tr>
@@ -41,8 +41,3 @@
         <a asp-page="Groups" class="btn btn-primary" asp-route-pagenumber='@(Model.PageNumber + 1)'>Next</a>
     </div>
 </div>
-<style>
-    tr {
-        color: white;
-    }
-</style>

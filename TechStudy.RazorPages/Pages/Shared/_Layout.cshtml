@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -15,7 +16,7 @@
     <a class="float" href="">
         <i class="fa-brands fa-whatsapp my-float"></i>
     </a>
-    <header>
+    <header style="margin-bottom: 20px">
         <div class="nav">
             <div class="nav-brand">
                 <a asp-page="/Index" asp-area="" class="nav-logo">
@@ -24,21 +25,43 @@
 
             </div>
             <ul class="navlist" id="navlist">
-                <li><a href="html.html">Əsas səhifə</a></li>
+                <li><a asp-page="/Index" asp-area="">Əsas səhifə</a></li>
                 <li><a href="#about">Haqqımızda</a></li>
                 <li><a href="#team-page">Üzvlər</a></li>
                 <li><a href="#contact">Əlaqə</a></li>
-                <li><a href="qruplar.html">Qruplar</a></li>
+                <li><a asp-page="/Groups" asp-area="">Qruplar</a></li>
                 <div id="registr">
-                    <a asp-area="Identity" asp-page="/Account/Login"><button>Daxil Ol</button></a>
-                    <a asp-area="Identity" asp-page="/Account/Register"><button class="btn1">Qeydiyyatdan Keç</button></a>
+                    @if (User != null && User.Identity.IsAuthenticated)
+                    {
+                        <a asp-area="" asp-page="/Account/Index" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value"><button>@User.FindFirstValue(ClaimTypes.Email)</button></a>
+                        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Index" style="display:inline">
+                            <a><button class="btn1">Çıxış</button></a>
+
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Login"><button>Daxil Ol</button></a>
+                        <a asp-area="Identity" asp-page="/Account/Register"><button class="btn1">Qeydiyyatdan Keç</button></a>
+                    }
                 </div>
 
             </ul>
 
             <div class="registr">
-                <a asp-area="Identity" asp-page="/Account/Login"><button>Daxil Ol</button></a>
-                <a asp-area ="Identity" asp-page="/Account/Register"><button class="btn1">Qeydiyyatdan Keç</button></a>
+                @if (User != null && User.Identity.IsAuthenticated)
+                {
+                    <a asp-area="" asp-page="/Account/Index" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)!.Value"><button>@User.FindFirstValue(ClaimTypes.Email)</button></a>
+                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Index" style="display:inline">
+                        <a><button class="btn1">Çıxış</button></a>
+
+                    </form>
+                }
+                else
+                {
+                    <a asp-area="Identity" asp-page="/Account/Login"><button>Daxil Ol</button></a>
+                    <a asp-area="Identity" asp-page="/Account/Register"><button class="btn1">Qeydiyyatdan Keç</button></a>
+                }
             </div>
             <span class="bar">
                 <i onclick="myFunction()" class="fa-solid fa-bars"></i>
