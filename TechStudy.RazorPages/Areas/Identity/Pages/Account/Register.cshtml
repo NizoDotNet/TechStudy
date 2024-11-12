@@ -4,56 +4,55 @@
     ViewData["Title"] = "Register";
 }
 
-<div class="container">
-    <h1>Qeydiyatdan keç</h1>
-    <div class="row">
-        <div class="col-md-4">
-            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+<section class="register-form">
+    <div class="container mt-5">
+        <form method="post" class="was-validated">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating">
+                    <input asp-for="Input.FirstName" type="text" class="form-control" name="name" id="name" placeholder="Name" required>
+                    <label asp-for="Input.FirstName">Ad:</label>
+                    <span asp-validation-for="Input.FirstName"></span>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <input asp-for="Input.SecondName" type="text" class="form-control" name="surname" id="surname" placeholder="Surname" required>
+                    <label asp-for="Input.SecondName">Soyad:</label>
+                    <span asp-validation-for="Input.SecondName"></span>
 
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.FirstName" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <label asp-for="Input.FirstName">Ad</label>
-                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.SecondName" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <label asp-for="Input.SecondName">Soyad</label>
-                    <span asp-validation-for="Input.SecondName" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <label asp-for="Input.Email">Email</label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.PhoneNumber" class="form-control" placeholder="+994xxxxxxxxx" />
-                    <label asp-for="Input.PhoneNumber">Əlaqə nömrəsi</label>
-                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.Password">Şifrə</label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.ConfirmPassword">Şifrəni təkrarlayın</label>
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                </div>
-              
-                <div class="form-floating mb-3">
-                    <select class="form-select" asp-items="Model.SpecList" asp-for="Input.Specialization"></select>
-                    <label asp-for="Input.Specialization">İxtisas</label>
-                </div>
+                </div><br>
+                <div class="form-floating">
+                    <input asp-for="Input.Email" type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                    <label asp-for="Input.Email">Email:</label>
+                    <span asp-validation-for="Input.Email"></span>
 
-                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Qeydiyyatdan keç</button>
-            </form>
-        </div>
-    </div>
+                </div><br>
+                <div class="form-floating">
+                    <input asp-for="Input.PhoneNumber" type="phone" class="form-control" name="phone" id="phone" placeholder="Telefon" required>
+                    <label asp-for="Input.PhoneNumber">Telefon nömrəsi:</label>
+                    <span asp-validation-for="Input.PhoneNumber"></span>
 
-</div>
+                </div><br>
+                <div class="form-floating">
+                    <input asp-for="Input.Password" type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                    <span onclick="showPassword()"> <i id="togglePassword" class="fa-regular fa-eye"></i></span>
+                    <label asp-for="Input.Password">Şifrə:</label>
+                    <span asp-validation-for="Input.Password"></span>
+
+                </div><br>
+                <div class="form-floating">
+                    <input asp-for="Input.ConfirmPassword" type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                    <label asp-for="Input.ConfirmPassword">Şifrənin təkrarı:</label>
+                    <span asp-validation-for="Input.ConfirmPassword"></span>
+
+                </div><br>
+                <div class="form-floating">
+                <select class="form-select" asp-items="Model.SpecList" asp-for="Input.Specialization"></select>
+                <label asp-for="Input.Specialization">İxtisas</label>
+                </div><br>
+                <button class="btn ">Təsdiqlə</button>
+        </form>
+    </div>  
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

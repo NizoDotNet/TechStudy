@@ -121,7 +121,7 @@ namespace TechStudy.RazorPages.Areas.Identity.Pages.Account
             public int Specialization { get; set; } 
 
         }
-
+        [BindProperty]
         public SelectList SpecList { get; set; }
         public async Task OnGetAsync(string returnUrl = null)
         {
